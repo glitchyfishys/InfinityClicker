@@ -384,6 +384,7 @@ function savegame(){
 }
 
 function loadgame(){
+    if(localStorage.InfinityClickerSave == undefined) return;
     let sav = JSON.parse(localStorage.InfinityClickerSave);
     if(sav == undefined) return;
 
