@@ -1,0 +1,555 @@
+
+:root{
+    --number-colour: skyblue;
+    --infinity-colour: #ffaa00;
+    --eternity-colour: #aa00ff;
+    --reality-colour: #00ff00;
+    --immisinity-colour: #ff0000;
+
+    --number-colour-shift: 200deg;
+    --infinity-colour-shift: 60deg;
+    --eternity-colour-shift: 280deg;
+    --reality-colour-shift: 150deg;
+    --immisinity-colour-shift: 0deg;
+}
+
+
+.hidden {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.redact{
+    color: white;
+    background-color: white;
+    border: white 1px solid;
+    border-radius: 5px;
+    pointer-events: stroke;
+    transition-duration: 250ms;
+}
+
+.redact:hover{
+    color: white;
+    border: transparent 1px solid;
+    background-color: transparent;
+}
+
+select{
+    color: white;
+    background-color: black;
+    appearance: none;
+}
+
+button{
+    border-color: black;
+    background-color: #555555;
+    color: white;
+    height: 75px;
+    border-radius: 5px;
+}
+
+.clicker{
+    position: fixed;
+    left: calc(50% - 75px);
+    bottom: 15px;
+    width: 150px;
+    height: 50px;
+    color: black;
+    border-color: skyblue;
+    background-color: white;
+}
+
+.currencys{
+    position: fixed;
+    left: calc(50% - 125px);
+    top: 20px;
+    width: 250px;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 1;
+    padding-bottom: 2px;
+}
+
+text{
+    color: white;
+    pointer-events: none;
+}
+
+.unbuyable{
+    border-color: red;
+}
+
+.buyable{
+    border-color: blue;
+}
+
+.brought{
+    border-color: lime;
+}
+
+.tab{
+    width: 100px;
+    height: 25px;
+}
+
+.upgrade{
+    margin-bottom: 15px;
+    width: 240px;
+    font-size: 12px;
+    transition-duration: 0.5s;
+    display: inline-grid;
+    overflow-y: hidden;
+}
+
+.srcoll{
+    position: sticky;
+    border: inherit;
+    border-width: 0px;
+    width: 250px;
+    height: 0px;
+    top: 470px;
+}
+
+.srcollbutton{
+    width: 80px;
+    height: 30px;
+    border: inherit;
+    border-width: 3px;
+    background-color: white;
+    color: black;
+}
+
+.tabbutton{
+    display: inline;
+    width: 80px;
+    height: 20px;
+    border: black solid 2px;
+    z-index: 1;
+    top: 0px;
+}
+
+.tab-button-holder{
+    position: absolute;
+    width: 250px;
+    height: 20px;
+    z-index: 1;
+    left: calc(50% - 125px);
+    top:0;
+}
+
+body{
+    background-color: black;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    width: 100%;
+    user-select: none;
+}
+
+.notifyoverlay {
+    position: fixed;
+    right: -150px;
+    top: 0px;
+    zoom: 0.75;
+}
+
+.notify {
+    width: 150px;
+    background-color: yellow;
+    color: black;
+    border: 5px white;
+    text-align: center;
+    transition-duration: 250ms;
+    transform: translateX(0px);
+}
+
+span{
+    pointer-events: none;
+    color: white;
+}
+
+.invert{
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+/* === range theme and appearance === */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+	color: royalblue;
+    background: white;
+    outline: none;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 30px;
+    background: white;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+
+input[type="text"] {
+    -webkit-appearance: none;
+    appearance: none;
+    text-align: center;
+	color: white;
+    background: black;
+    outline: none;
+    border: 3px solid purple;
+    border-radius: 5px;
+}
+
+
+/* === range commons === */
+
+input:disabled {
+	filter: grayscale(0.5);
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+/* Check box */
+
+input[type=checkbox] {
+    height: 15px;
+    width: 15px;
+    accent-color: lime;
+    cursor: pointer;
+}
+
+input[type=checkbox]:hover{
+    outline: 8px solid yellow;
+    outline-offset: -8px;
+    border-radius: 3px;
+}
+
+input[type=checkbox]:active{
+    outline: 8px solid red;
+    outline-offset: -8px;
+    border-radius: 3px;
+}
+
+input[type=checkbox]:checked{
+    outline: 2px solid lime;
+    outline-offset: -2px;
+    border-radius: 3px;
+}
+
+
+
+input[type="number"] {
+    appearance: none;
+	color: white;
+    background-color: black;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.hoverUI{
+    border: 2px solid red;
+    border-radius: 5px;
+    position: fixed;
+    left: -1000px;
+    background-color: black;
+    z-index: 1;
+    text-align: center;
+    color: white;
+}
+
+.catalog{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: skyblue solid 5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: skyblue blue;
+    transition-duration: 1s;
+}
+
+.INF-UG{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: orange solid 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+
+.ETR-UG{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: purple solid 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+
+.REA-UG{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: lime solid 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+
+.IMM-UG{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: red solid 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+/* new layer htanl */
+.newlayer-UG{
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    width: 250px;
+    height: 500px;
+    border: red solid 5px;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+
+.UNI-UG{
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 100px;
+    border: red solid 5px;
+    animation: rgb 5s infinite linear;
+    overflow: hidden;
+    transition-duration: 1s;
+}
+
+@keyframes rgb {
+    0%{
+        background-color: darkred;
+        border-color: red;
+    }
+    33%{
+        background-color: darkgreen;
+        border-color: green;
+    }
+    66%{
+        background-color: darkblue;
+        border-color: blue;
+    }
+    100%{
+        background-color: darkred;
+        border-color: red;
+    }
+}
+
+.unisrcoll{
+    position: sticky;
+    border: inherit;
+    border-width: 0;
+    width: 250px;
+    height: 0px;
+    top: 70px;
+}
+
+.resetbutton{
+    width: 120px;
+    height: 35px;
+    margin-top: 5px;
+    border-color: royalblue;
+}
+
+.gameinfo{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    width: 50px;
+}
+
+.activeglyphs{
+    position: absolute;
+    width: 20%;
+    height: 30px;
+    top: 260px;
+    transition-duration: 1s;
+    scrollbar-width: thin;
+    scrollbar-color: #00cc00 #005500;
+}
+
+.glyphs{
+    position: absolute;
+    width: 20%;
+    height: 180px;
+    top: 330px;
+    overflow-y: scroll;
+    transition-duration: 1s;
+    scrollbar-width: thin;
+    scrollbar-color: #00cc00 #005500;
+}
+
+.glyph{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: black solid 2px;
+    display: inline-table;
+}
+
+.glyphbuttons{
+    position: absolute;
+    display: flex;
+    width: 20%;
+    height: 20px;
+    top: 290px;
+    transition-duration: 1s;
+}
+
+.BHbuttons{
+    position: absolute;
+    width: 20%;
+    height: 180px;
+    top: 330px;
+    transition-duration: 1s;
+}
+
+.BHUG{
+    width: 200px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.BlackHole{
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    border: white solid 3px;
+    background-color: black;
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    border-radius: 50%;
+    transition-duration: 1s;
+    z-index: -1;
+}
+
+.closemodalbutton{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.lowermodalbutton{
+    width: 150px;
+    height: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.modal{
+    position: absolute;
+    background-color: black;
+    border: gray solid 3px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+    min-width: 150px;
+    min-height: 50px;
+    z-index: 5;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.layer{
+    position: relative;
+    top: 0;
+    transition-duration: 1s;
+}
+
+.backoffset{
+    margin-left: calc(-25%);
+}
+
+.back0{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: brightness(0.5) hue-rotate(var(--number-colour-shift));
+    transition-duration: 1s;
+}
+.back1{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: hue-rotate(var(--number-colour-shift));
+    transition-duration: 1s;
+}
+.back2{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: hue-rotate(var(--infinity-colour-shift));
+    transition-duration: 1s;
+
+}
+.back3{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: hue-rotate(var(--eternity-colour-shift));
+    transition-duration: 1s;
+
+}
+.back4{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: hue-rotate(var(--reality-colour-shift));
+    transition-duration: 1s;
+}
+.back5{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -10;
+    filter: hue-rotate(var(--immisinity-colour-shift));
+    transition-duration: 1s;
+}
+

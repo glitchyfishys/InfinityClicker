@@ -1,0 +1,40 @@
+hello, this is to help if you use scratch
+
+firstly is Decimal (i made this one) is just for bigger numbers upto 1e1.79E308 (10^1.79e308) rather than 1.79e308 (Infinity)
+
+Decimal.add(left, right); add(8,5) , returns 13 as a Decimal;
+Decimal.sub(left, right); sub(8,5) , returns 3 as a Decimal;
+
+Decimal.mul(left, right); mul(100,10) , returns 1000 as a Decimal;
+Decimal.div(left, right); div(100,10) , returns 10 as a Decimal;
+
+Decimal.pow(left, right); pow(10,2) , returns 100 as a Decimal;
+Decimal.log(left, right); log(100,10) , returns 2 as a Decimal;  the second imput has to be a number
+
+Decimal.root(left, right); root(100,2) , returns 10 as a Decimal; the second imput has to be a number
+
+Decimal.toString(length); (1000).toString(5) , returns "`1000.00000" as a string, imput must be a number
+
+max returns heighest value
+min returns lowest value
+
+Math.clamp - change the value to be between the min and max; Math.clamp(20,5,10) return 10; Math.clamp(2,8,28) return 8; Math.clamp(20,8,28) return 20;
+Math.randomBetween - returns a value between the inputs; Math.randomBetween(12, 25) returns a number 12 to 25;
+
+2:
+
+adding upgrades
+
+copy the code for one of the upgrades and change the values
+
+for a new layer of upgrades copy the file and change names, add foreach to startup making 
+
+3:
+arrays are like list but the first is 0 not 1 so it's like this array[0] in scratch its [1] for its first
+
+4: adding new layer
+
+add it to the HTML and give upgrades that id
+
+look for "htanl" or the layer-upgrades.js files on where to add new content
+
