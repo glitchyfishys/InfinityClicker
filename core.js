@@ -223,7 +223,11 @@ function maxupgrades(id = "infinity"){
 
 function startup(){
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if(isMobile) modal.showtext("Mobile UI<br>sorry mobile is very broken right now, UI is diffent from PC<br> make an issue on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll get to it at some point");
+    if(isMobile) {
+        modal.showtext("Mobile UI<br>sorry mobile is very broken right now, UI is diffent from PC<br> make an issue on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll get to it at some point");
+        modal.style.zoom = 4;
+        return;
+    }
     immensityupgadedata.forEach(x => ImmensityUpgrades.push(new upgrade(x)));
     realityupgadedata.forEach(x => RealityUpgrades.push(new upgrade(x)));
     eternityupgadedata.forEach(x => EternityUpgrades.push(new upgrade(x)));
