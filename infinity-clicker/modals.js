@@ -1,0 +1,213 @@
+
+const modal ={
+
+    openid: 0,
+
+    get open(){
+        return gamemodel.classList.contains("hidden");
+    },
+
+    show() {
+        gamemodel.classList.remove("hidden");
+    },
+
+    showtext(text = "hello") {
+        gamemodel.innerHTML = "";
+        
+        let displaytext = "";
+        Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
+        
+        gamemodel.innerHTML += displaytext;
+        
+        const cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "X";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => this.close();
+
+        modal.show();
+        this.openid = 1;
+    },
+
+    // infinity Eternity Reality Immensity new layer
+    showreset(layer = "infinity", text = "") {
+        gamemodel.innerHTML = "";
+
+        let displaytext = "";
+        Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
+
+        gamemodel.innerHTML += `${layer}<br> ${this[layer + "resetstring"]} <br>${displaytext}`;
+
+        let cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "x";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => modal.close();
+
+        cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = layer;
+        cl.classList.add("lowermodalbutton");
+        cl.onclick = () => {eval(layer).reset(); this.close();}
+
+        modal.show();
+        this.openid = 2;
+    },
+
+    showsettings(text = "") {
+        gamemodel.innerHTML = "settings<br>";
+
+        if(game.progress == 1) gamemodel.innerHTML += "come back later";
+
+        let cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "x";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => modal.close();
+        
+
+        if(game.progress > 1){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "confirm infinity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.confirm.infinity = !settings.confirm.infinity};
+            al.checked = settings.confirm.infinity;
+        }
+
+        if(game.progress > 2){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "<br>";
+
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "confirm eternity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.confirm.eternity = !settings.confirm.eternity};
+            al.checked = settings.confirm.eternity;
+        }
+
+        if(game.progress > 3){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "<br>";
+            
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "confirm reality";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.confirm.reality = !settings.confirm.reality;};
+            al.checked = settings.confirm.reality;
+            
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "<br>";
+        }
+
+        if(game.progress > 4){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "confirm immensity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.checked = settings.confirm.immensity;
+            al.onclick = () => {settings.confirm.immensity = !settings.confirm.immensity;};
+        }
+
+        modal.show();
+        this.openid = 3;
+    },
+
+    showinfo(){
+        gamemodel.innerHTML = "game info<br><br>";
+
+        let al = gamemodel.appendChild(document.createElement("span"));
+        al.innerHTML = `you highest number amount is ${Currency.highestnumber.toString(2,2)}<br>you have played for ${Time.format(Time.totaltime)}<br><br>`;
+
+        if(game.progress > 1){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `infinity<br>you have infinityed ${Currency.INFs.toString(0,2)} times ${game.progress > 2 ? "this eternity" : ""}<br> you have been in this infinity for ${Time.format(Time.thisinfinity)} seconds and your best infinity time is ${Time.format(Time.bestinfinity)} seconds <br><br>`;
+        }
+
+        if(game.progress > 2){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `eternity<br>you have eternityed ${Currency.ETRs.toString(0,2)} times ${game.progress > 3 ? "this reality" : ""}<br> you have been in this eternity for ${Time.format(Time.thiseternity)} seconds and your best eternity time is ${Time.format(Time.besteternity)} seconds <br><br>`;
+        }
+
+        if(game.progress > 3){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `reality<br>you have realityed ${Currency.REAs.toString(0,2)} times ${game.progress > 4 ? "this immensity" : ""}<br> you have been in this reality for ${Time.format(Time.thisreality)} seconds and your best reality time is ${Time.format(Time.bestreality)} seconds <br><br>`;
+        }
+
+        if(game.progress > 4){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `immensity<br>you have immensityed ${Currency.IMMs.toString(0,2)} times <br> you have been in this immensity for ${Time.format(Time.thisimmensity)} seconds and your best immensity time is ${Time.format(Time.bestimmensity)} seconds`;
+        }
+
+        let cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "x";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => modal.close();
+
+        modal.show();
+        this.openid = 4;
+    },
+
+    showhotkeys(){
+        gamemodel.innerHTML = "hotkeys<br>";
+
+        if(game.progress == 1){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `<br> none yet`;
+        }
+
+        if(game.progress > 1){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `<br>infinity = "I" <br> buy max infinity upgrades = "M" <br><br>`;
+        }
+
+        if(game.progress > 2){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `eternity = "E" <br> buy max eternity upgrades = "K" <br><br>`;
+        }
+
+        if(game.progress > 3){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L" <br><br>`;
+        }
+
+        if(game.progress > 4){
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `immensity = "N" <br>`;
+        }
+
+        let cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "x";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => modal.close();
+
+        modal.show();
+        this.openid = 5;
+    },
+
+    close(){
+        this.openid = 0;
+        gamemodel.classList.add("hidden");
+    },
+
+    get infinityresetstring(){
+        return "when you infinity you gain IP for upgrades <br> on infinity your number resets<br>";
+    },
+
+    get Eternityresetstring(){
+        return `when you eternity you gain EP for upgrades <br> on eternity IP, infinity upgrades and your number resets ${infinity.heighestKeepedUpgrade > 0 ? `but you keep ${infinity.heighestKeepedUpgrade} infinity upgrades` : ""}<br>`;
+    },
+
+    get Realityresetstring(){
+        return `when you reality you gain RP for upgrades and ${Reality.gainedglyphs} ${Reality.gainedglyphs > 1 ? "glyphs" : "glyph"} <br> on reality EP, eternity upgrades, IP, infinity upgrades and your number resets ${Eternity.heighestKeepedUpgrade > 0 ? `but you keep ${Eternity.heighestKeepedUpgrade} eternity upgrades` : ""}<br>`;
+    },
+
+    get Immensityresetstring(){
+        return "when you immensity you gain IM for upgrades with requirements<br> on immensity RP, reality upgrades, glyphs, EP, eternity upgrades, IP, infinity upgrades and your number resets<br>";
+    },
+}
+
+// update info
+setInterval(() => {
+    if(modal.openid == 4){
+        modal.showinfo();
+    }
+}, 250);
