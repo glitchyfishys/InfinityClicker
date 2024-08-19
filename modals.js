@@ -165,7 +165,7 @@ const modal ={
 
         if(game.progress > 3){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L" <br><br>`;
+            al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L"<br>shift clicking on a glyph removes it<br><br>`;
         }
 
         if(game.progress > 4){
