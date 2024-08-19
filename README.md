@@ -2,4 +2,5 @@
 
 infinity clicker is orginaly a srcatch game
 
-for people to remix and add thier onw up date
+for people to remix and add thier own update
+
