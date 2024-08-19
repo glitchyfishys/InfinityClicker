@@ -296,7 +296,7 @@ const catalogdata = [
     {
         version: "V3.1.1",
         who: "glitchyfishys",
-        what: `added break infinity, it also fixed dome bugs
+        what: `added break infinity, it also fixed some bugs
             auto points gain is incresed by gamespeed
             left and right arrows move tabs, up and down open the uni upgrades
             fixed turbo mode breaking auto clicker`,
@@ -334,6 +334,15 @@ function loadcatalog(){
 
     catalog.innerHTML = catalog.innerHTML.replaceAll("glyphs", "<span id='redact' class='redact'>glyphs</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Glyphs", "<span id='redact' class='redact'>Glyphs</span>");
+    
+    catalog.innerHTML = catalog.innerHTML.replaceAll("eternities", "<span id='redact' class='redact'>eternities</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("Eternities", "<span id='redact' class='redact'>Eternities</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("realites", "<span id='redact' class='redact'>realites</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("Realites", "<span id='redact' class='redact'>Realites</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("immensities", "<span id='redact' class='redact'>immensities</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("Immensities", "<span id='redact' class='redact'>Immensities</span>");
+    
+    catalog.innerHTML = catalog.innerHTML.replaceAll("gamespeed", "<span id='redact' class='redact'>gamespeed</span>");
 
 
 }
