@@ -149,13 +149,12 @@ const modal ={
     showhotkeys(){
         gamemodel.innerHTML = "hotkeys<br>";
 
-        if(game.progress == 1){
-            let al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `<br> none yet`;
-        }
+
+        let al = gamemodel.appendChild(document.createElement("span"));
+        al.innerHTML = `<br>shift clicking up/down move 5x at much`;
 
         if(game.progress > 1){
-            let al = gamemodel.appendChild(document.createElement("span"));
+            al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = `<br>infinity = "I" <br> buy max infinity upgrades = "M" <br><br>`;
         }
 
@@ -171,7 +170,7 @@ const modal ={
 
         if(game.progress > 4){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `immensity = "N" <br>`;
+            al.innerHTML = `immensity = "N" <br> holding shift shows requirements`;
         }
 
         let cl = gamemodel.appendChild(document.createElement("button"));
