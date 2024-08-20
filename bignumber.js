@@ -75,7 +75,7 @@ class Decimal{
         if (!(bn instanceof Decimal)) bn = new Decimal(bn)
 		let m = this.m * bn.m;
 		let e = this.e + bn.e;
-        return new Decimal(m,e);
+        return new Decimal(m,e).fix();
 	}
 
     static mul(Bn, bn) {
@@ -99,7 +99,7 @@ class Decimal{
         if(bn.eq(0)) return this;
 		let m = this.m / bn.m;
 		let e = this.e - bn.e;
-        return new Decimal(m,e);
+        return new Decimal(m,e).fix();
 	};
 
     static div(Bn, bn) {
@@ -130,7 +130,7 @@ class Decimal{
         }
         let m = this.m;
         m = m + (bn.m * (10 ** dif));
-        return new Decimal(m,this.e);
+        return new Decimal(m,this.e).fix();
     }
 
     static add(Bn ,bn) {
@@ -167,7 +167,7 @@ class Decimal{
         }
         let m = this.m;
         m = m - (bn.m * (10 ** dif));
-        return new Decimal(m,this.e);
+        return new Decimal(m,this.e).fix();
     }
 
     pow(bn = 1) {
@@ -179,9 +179,7 @@ class Decimal{
 
         m = 10 ** (e % 1);
         e = Math.floor(e);
-
-        let D = new Decimal(m,e);
-        return D;
+        return new Decimal(m,e).fix();
     }
 
     static pow(Bn, bn = 1) {
@@ -224,7 +222,7 @@ class Decimal{
         if(n==0) console.warn("log used zero");
         if(this.e < 0) return new Decimal(0,0,false);
         let m = (this.e + Math.log10(this.m)) / Math.log10(n);
-        return new Decimal(m, 0);
+        return new Decimal(m, 0).fix();
     }
 
     static log(bn = new Decimal(1,1),n = 10) {
