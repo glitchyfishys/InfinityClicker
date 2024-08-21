@@ -514,7 +514,7 @@ game = {
     },
     frametick: 0,
     get speed(){
-        if(BlackHoles.length == 0) return DC.D0;
+        if(BlackHoles.length == 0) return DC.D1;
         return BlackHoles[0].effect;
     },
 }
