@@ -744,7 +744,7 @@ const Time = {
     },
 
     timechanges: {// note time is done in seconds
-        milliseconds: 0.0001,
+        milliseconds: 0.001,
         seconds: 1,
         minutes: 60,
         hours: 3600,
