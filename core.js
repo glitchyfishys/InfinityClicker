@@ -455,7 +455,7 @@ function loadgame(){
 
 
 function nummul(){
-    let def = DC.De5;
+    let def = DC.De3;
     if(InfinityUpgrades[0].brought) def = DC.De7;
     if(InfinityUpgrades[4].brought) def = DC.De15;
     if(InfinityUpgrades[5].brought) def = DC.De30;
