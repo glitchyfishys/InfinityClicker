@@ -230,10 +230,9 @@ const Immensity = {
 
 class BlackHole {
     constructor(data = { powerUGs: 1, intervalUGs: 1, lengthUGs: 1, active: false, timer: 0}){
-        this.powerUGs =  data.powerUGs;
-        this.intervalUGs = data.intervalUGs;
-        this.lengthUGs = data.lengthUGs;
-        this.timer = data.timer;
+        this.powerUGs = (data.powerUGs != undefined ? data.powerUGs : 0);
+        this.intervalUGs = (data.intervalUGs != undefined ? data.intervalUGs : 0);
+        this.lengthUGs = (data.lengthUGs != undefined ? data.lengthUGs : 0);
         if(data.active != undefined) this.active = data.active;
     }
 
