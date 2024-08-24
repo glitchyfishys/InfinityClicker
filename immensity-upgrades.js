@@ -116,7 +116,7 @@ const immensityupgadedata = [
         reqirement: true,
         unlock: () => false, // not to auto update
         reqirementtext: "immensity with over 100 IM",
-        onbuy: () => player.Blackhole[0] = new BlackHole(0,0,0,false),
+        onbuy: () => player.Blackhole[0] = new BlackHole(),
     },
     {
         id: 8,
@@ -229,7 +229,7 @@ const Immensity = {
 }
 
 class BlackHole {
-    constructor(data = { powerUGs: 1, intervalUGs: 1, lengthUGs: 1, active: false, timer}){
+    constructor(data = { powerUGs: 1, intervalUGs: 1, lengthUGs: 1, active: false, timer: 0}){
         this.powerUGs =  data.powerUGs;
         this.intervalUGs = data.intervalUGs;
         this.lengthUGs = data.lengthUGs;
