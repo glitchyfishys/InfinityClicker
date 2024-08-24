@@ -362,7 +362,7 @@ const Reality = {
         if(RealityUpgrades[22].brought) gain = gain.mul(10);
         if(RealityUpgrades[25].brought) gain = gain.pow(2);
         if(RealityUpgrades[26].brought) gain = gain.mul(10);
-        if(ImmensityUpgrades[0].brought) gain = gain.mul(5);
+        if(ImmensityUpgrades[0].brought) gain = gain.mul(25);
         
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).div(10).max(1));
 
