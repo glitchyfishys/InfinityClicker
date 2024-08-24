@@ -4,8 +4,13 @@
     --infinity-colour: #ffaa00;
     --eternity-colour: #aa00ff;
     --reality-colour: #00ff00;
-    --immisinity-colour: #ff0000;
-
+    --immensity-colour: #ff0000;
+    
+	--infinity-colour-dark: #aa5500;
+	--eternity-colour-dark: #5500aa;
+    --reality-colour-dark: #00aa00;
+    --immensity-colour-dark: #aa0000;
+	
     --number-colour-shift: 200deg;
     --infinity-colour-shift: 60deg;
     --eternity-colour-shift: 280deg;
@@ -285,8 +290,10 @@ input[type="number"] {
     margin-top: 50px;
     width: 250px;
     height: 500px;
-    border: orange solid 5px;
-    overflow: hidden;
+    border: var(--infinity-colour) solid 5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--infinity-colour) var(--infinity-colour-dark);
     transition-duration: 1s;
 }
 
@@ -296,8 +303,10 @@ input[type="number"] {
     margin-top: 50px;
     width: 250px;
     height: 500px;
-    border: purple solid 5px;
-    overflow: hidden;
+    border: var(--eternity-colour) solid 5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--eternity-colour) var(--eternity-colour-dark);
     transition-duration: 1s;
 }
 
@@ -307,8 +316,10 @@ input[type="number"] {
     margin-top: 50px;
     width: 250px;
     height: 500px;
-    border: lime solid 5px;
-    overflow: hidden;
+    border: var(--reality-colour) solid 5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--reality-colour) var(--reality-colour-dark);
     transition-duration: 1s;
 }
 
@@ -318,10 +329,13 @@ input[type="number"] {
     margin-top: 50px;
     width: 250px;
     height: 500px;
-    border: red solid 5px;
-    overflow: hidden;
+    border: var(--immensity-colour) solid 5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--immensity-colour) var(--immensity-colour-dark);
     transition-duration: 1s;
 }
+
 /* new layer htanl */
 .newlayer-UG{
     position: absolute;
