@@ -3,9 +3,9 @@ const realityupgadedata = [
     {
         id: 0,
         effect: () => {
-            return DC.D4;
+            return DC.D8;
         },
-        decription: "gain one eternity point every 60 seconds <br> also doubles EP gain <br> and autobuy infinity upgrades",
+        decription: "gain one eternity point every 60 seconds <br> also octuples EP gain <br> and autobuy infinity upgrades",
         effectdisplay: value => "1/60 EP sec and x" + value.toString(1) + " EP",
         cost: DC.D1,
         currencykey: "realitypoints",
@@ -362,7 +362,7 @@ const Reality = {
         if(RealityUpgrades[22].brought) gain = gain.mul(10);
         if(RealityUpgrades[25].brought) gain = gain.pow(2);
         if(RealityUpgrades[26].brought) gain = gain.mul(10);
-        if(ImmensityUpgrades[0].brought) gain = gain.mul(5);
+        if(ImmensityUpgrades[0].brought) gain = gain.mul(25);
         
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).div(10).max(1));
 

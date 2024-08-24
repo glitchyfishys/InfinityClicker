@@ -3,9 +3,9 @@ const eternityupgadedata = [
     {
         id: 0,
         effect: () => {
-            return DC.D2;
+            return DC.D3;
         },
-        decription: "gain one infinity point every 10 seconds <br> also doubles IP gain",
+        decription: "gain one infinity point every 10 seconds <br> also triples IP gain",
         effectdisplay: value => "1/10 IP sec and x" + value.toString(1) + " IP",
         cost: DC.D1,
         currencykey: "eternitypoints",
@@ -29,7 +29,7 @@ const eternityupgadedata = [
         effect: () => {
             return DC.D2;
         },
-        decription: "double the gain of the first eternity upgrade",
+        decription: "double the auto gain of the first eternity upgrade",
         effectdisplay: value => "x" + value.toString(1) + " auto IP",
         cost: DC.D2,
         currencykey: "eternitypoints",

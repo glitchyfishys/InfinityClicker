@@ -6,8 +6,8 @@
     --reality-colour: #00ff00;
     --immensity-colour: #ff0000;
     
-	--infinity-colour-dark: #aa5500;
-	--eternity-colour-dark: #5500aa;
+    --infinity-colour-dark: #aa5500;
+    --eternity-colour-dark: #5500aa;
     --reality-colour-dark: #00aa00;
     --immensity-colour-dark: #aa0000;
 	
@@ -291,6 +291,7 @@ input[type="number"] {
     width: 250px;
     height: 500px;
     border: var(--infinity-colour) solid 5px;
+	overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: var(--infinity-colour) var(--infinity-colour-dark);
@@ -304,6 +305,7 @@ input[type="number"] {
     width: 250px;
     height: 500px;
     border: var(--eternity-colour) solid 5px;
+	overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: var(--eternity-colour) var(--eternity-colour-dark);
@@ -317,6 +319,7 @@ input[type="number"] {
     width: 250px;
     height: 500px;
     border: var(--reality-colour) solid 5px;
+	overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: var(--reality-colour) var(--reality-colour-dark);
@@ -330,6 +333,7 @@ input[type="number"] {
     width: 250px;
     height: 500px;
     border: var(--immensity-colour) solid 5px;
+	overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: var(--immensity-colour) var(--immensity-colour-dark);
