@@ -3,9 +3,9 @@ const immensityupgadedata = [
     {
         id: 0,
         effect: () => {
-            return DC.D5;
+            return DC.D25;
         },
-        decription: "gain one reality point every 25 minutes <br> also doubles RP gain",
+        decription: "gain one reality point every 25 minutes <br> also 25x RP gain",
         effectdisplay: value => "1/1500 RP sec and x" + value.toString(1) + " RP",
         cost: DC.D1,
         currencykey: "immensitypoints",
