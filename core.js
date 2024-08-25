@@ -231,12 +231,10 @@ function maxupgrades(id = "infinity"){
 
 function startup(){
     if(game.isMobile){
-        document.styleSheets[0].disabled = true;
-        document.styleSheets[1].disabled = false;
+        style.href = "style mobile.css"
     }
     else{
-        document.styleSheets[0].disabled = false;
-        document.styleSheets[1].disabled = true;
+        style.href = "style.css"
     }
     if(game.isMobile) {
         modal.showtext("Mobile UI<br>sorry mobile is a WIP, help find bugs.<br>make an issue(s) on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll try and fix it");
