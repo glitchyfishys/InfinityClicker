@@ -6,7 +6,7 @@ const infinityupgadedata = [
             return DC.De7;
         },
         decription: "number multiplier is change from x1e5 to x1e7",
-        effectdisplay: value => "1e3 => " + value.toString(1) + " number multiplier",
+        effectdisplay: value => "1e3 => " + format(value) + " number multiplier",
         cost: DC.D1,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -30,7 +30,7 @@ const infinityupgadedata = [
             return DC.D2;
         },
         decription: "double auto clicker speed",
-        effectdisplay: value => "auto clicker interval /" + value.toString(1),
+        effectdisplay: value => "auto clicker interval /" + format(value),
         cost: DC.D3,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -42,7 +42,7 @@ const infinityupgadedata = [
             return DC.D5;
         },
         decription: "auto clicker is every 0.1 seconds",
-        effectdisplay: value => "auto cliker interval /" + value.toString(1),
+        effectdisplay: value => "auto cliker interval /" + format(value),
         cost: DC.D5,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -54,7 +54,7 @@ const infinityupgadedata = [
             return DC.De15;
         },
         decription: "number multiplier is now x1e15",
-        effectdisplay: value => "1e7 =>" + value.toString(1) + " number multiplier",
+        effectdisplay: value => "1e7 =>" + format(value) + " number multiplier",
         cost: DC.D15,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -66,7 +66,7 @@ const infinityupgadedata = [
             return DC.De30;
         },
         decription: "number multiplier is now x1e30",
-        effectdisplay: value => "1e15 => " + value.toString(1) + " number multiplier",
+        effectdisplay: value => "1e15 => " + format(value) + " number multiplier",
         cost: DC.D50,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -78,7 +78,7 @@ const infinityupgadedata = [
             return DC.De30;
         },
         decription: "number multiplier do x1e30 more",
-        effectdisplay: value => "x" + value.toString(1) + " number multiplier",
+        effectdisplay: value => "x" + format(value) + " number multiplier",
         cost: DC.D100,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -90,7 +90,7 @@ const infinityupgadedata = [
             return DC.D2;
         },
         decription: "square root the infinity req",
-        effectdisplay: value => DC.infinity.root(2).toString() + " infinity requirement",
+        effectdisplay: value => format(DC.infinity.sqrt()) + " infinity requirement",
         cost: DC.D200,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -102,7 +102,7 @@ const infinityupgadedata = [
             return DC.D2;
         },
         decription: "square root the infinity req again",
-        effectdisplay: value => DC.infinity.root(4).toString(2) + " infinity requirement",
+        effectdisplay: value => format(DC.infinity.pow(0.25)) + " infinity requirement",
         cost: DC.D400,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -114,7 +114,7 @@ const infinityupgadedata = [
             return DC.D10;
         },
         decription: "gain 10x more IP",
-        effectdisplay: value => "x" + value.toString(1) + " IP",
+        effectdisplay: value => "x" + format(value) + " IP",
         cost: DC.D800,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -126,7 +126,7 @@ const infinityupgadedata = [
             return DC.De100;
         },
         decription: "mult is now a googol",
-        effectdisplay: value => "1e60 => " + value.toString(1) + " number multiplier",
+        effectdisplay: value => "1e60 => " + format(value) + " number multiplier",
         cost: DC.De3,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -138,7 +138,7 @@ const infinityupgadedata = [
             return DC.De1000;
         },
         decription: "mult gains a power of 10",
-        effectdisplay: value => "1e100 => " + value.toString(1) + " number multiplier",
+        effectdisplay: value => "1e100 => " + format(value) + " number multiplier",
         cost: DC.D2e3,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -150,7 +150,7 @@ const infinityupgadedata = [
             return DC.De40;
         },
         decription: "inf req is now 1e40",
-        effectdisplay: value => value.toString(1)+ " infinity requirment",
+        effectdisplay: value => format(value)+ " infinity requirment",
         cost: DC.D5e3,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -174,7 +174,7 @@ const infinityupgadedata = [
             return DC.D10;
         },
         decription: "IP gain 10x again",
-        effectdisplay: value => "x" + value.toString(1) + " IP",
+        effectdisplay: value => "x" + format(value) + " IP",
         cost: DC.De5,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -186,7 +186,7 @@ const infinityupgadedata = [
             return DC.De10;
         },
         decription: "infinity req is 1e10",
-        effectdisplay: value => "1e40 => " + value.toString(1) + " infinity requirement",
+        effectdisplay: value => "1e40 => " + format(value) + " infinity requirement",
         cost: DC.De7,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -198,7 +198,7 @@ const infinityupgadedata = [
             return DC.D5;
         },
         decription: "IP gain ^ 5",
-        effectdisplay: value => "^" + value.toString(1) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De8,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -210,7 +210,7 @@ const infinityupgadedata = [
             return DC.D3;
         },
         decription: "auto clicker is 3 times faster",
-        effectdisplay: value => "auto clicker interval /" + value.toString(1),
+        effectdisplay: value => "auto clicker interval /" + format(value),
         cost: DC.De15,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -222,7 +222,7 @@ const infinityupgadedata = [
             return DC.D5;
         },
         decription: "IP gain ^ 5",
-        effectdisplay: value => "^" + value.toString(1) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De16,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -234,7 +234,7 @@ const infinityupgadedata = [
             return DC.D6;
         },
         decription: "IP gain ^ 6",
-        effectdisplay: value => "^" + value.toString(1) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De56,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -246,7 +246,7 @@ const infinityupgadedata = [
             return DC.D100;
         },
         decription: "IP gain x100",
-        effectdisplay: value => "x" + value.toString(1) + " IP",
+        effectdisplay: value => "x" + format(value) + " IP",
         cost: DC.De306,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -258,7 +258,7 @@ const infinityupgadedata = [
             return new Decimal(1.2);
         },
         decription: "IP gain ^ 1.2",
-        effectdisplay: value => "^" + value.toString(1) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De310,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -270,7 +270,7 @@ const infinityupgadedata = [
             return new Decimal(1.5);
         },
         decription: "IP gain ^ 1.5",
-        effectdisplay: value => "^" + value.toString(1) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De740,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -287,8 +287,8 @@ const infinity = {
     
     get numberlimit(){
         let limit = DC.infinity;
-        if(InfinityUpgrades[7].brought) limit = limit.root(2);
-        if(InfinityUpgrades[8].brought) limit = limit.root(2);
+        if(InfinityUpgrades[7].brought) limit = limit.sqrt();
+        if(InfinityUpgrades[8].brought) limit = limit.sqrt();
         if(InfinityUpgrades[12].brought) limit = DC.De40;
         if(InfinityUpgrades[15].brought) limit = DC.De10;
     
@@ -317,6 +317,8 @@ const infinity = {
 
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1));
 
+        if(InfinityUpgrades[7].brought) gain = gain.mul(2);
+        if(InfinityUpgrades[8].brought) gain = gain.mul(2);
 
         gain = gain.pow(TotalGlyphEffects.Infinity());
         if(!this.broken) return gain.mul(Universal.gainedbonus);
@@ -340,7 +342,7 @@ const infinity = {
         if(EternityUpgrades[2].brought) gain = gain.mul(2);
         gain = gain.mul(EternityUpgrades[6].effectordefault(1));
 
-        if(EternityUpgrades[7].brought) gain = this.gainedinfinitypoints.div(1e4);
+        if(EternityUpgrades[7].brought && this.gainedinfinitypoints.gt(0)) gain = this.gainedinfinitypoints.div(1e4);
         if(EternityUpgrades[10].brought) {gain = gain.mul(100); speed = speed.mul(5);}
         if(EternityUpgrades[14].brought) speed = speed.mul(10);
         if(RealityUpgrades[16].brought) speed = speed.mul(10);

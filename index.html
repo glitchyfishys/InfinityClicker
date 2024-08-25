@@ -2,11 +2,13 @@
 <html lang="en-US">
     <head>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style mobile.css">
         <title>infinity clicker v3.1.1</title>
         <link rel="shortcut icon" type="image/png" href="icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="gameinfo">
+        <div id="gameinfo" class="gameinfo">
             <button style="width: 125px; height: 25px;"><a style="color: orange;" target="_blank" href="https://scratch.mit.edu/projects/918364482/">orginal on scratch</a></button>
             <button style="width: 100px; height: 25px;"><a style="color: lime;" target="_blank" href="https://open.spotify.com/playlist/5P9oRAJkVMDXOCri2kfHlw?si=edecbfe76f804d85">spoitfy</a></button>
             <button style="width: 100px; height: 25px;" onclick="modal.showsettings()">settings</button>
@@ -45,16 +47,16 @@
         <button id="clicker" class="clicker"></button>
         <p id="FPS" style="position: fixed; bottom: -5px; left: 5px;">fps</p>
 
-        <div class="tab-button-holder">
+        <div id="tabbuttons" class="tab-button-holder">
             <button class="tabbutton" onclick="tab(true)">left</button>
             <button class="tabbutton" onclick="toggleuni()">toggle uni</button>
             <button class="tabbutton" onclick="tab(false)">right</button>
         </div>
 
-        <div class="currencys">
+        <div id="currencys" class="currencys">
             <p id="number">money</p>
             <!-- this is where you add a new reset button for a layer -->
-            <div>
+            <div id="resetbn">
                 <button id="infinityreset" class="resetbutton" onclick="settings.confirm.infinity ? modal.showreset('infinity') : infinity.reset()">
                     Infinity
                 </button>
@@ -75,7 +77,7 @@
 
         
         <!-- this is where you add a new layers and upgrades htanl-->
-        <div>
+        <div id="stuff">
 
             <div id="layernumber" class="layer">
                     <div class="catalog" style="background-color: black;">
@@ -148,9 +150,10 @@
     </body>
         <!-- this is where you add a new upgrades -->
 
+    <script src="https://cdn.jsdelivr.net/npm/breaketernity.js@2"></script>
+    <script src="bignumber.js"></script>
     <script src="keydrown.js"></script>
     <script src="modals.js"></script>
-    <script src="bignumber.js"></script>
     <script src="consts.js"></script>
     <script src="notify.js"></script>
     <script src="upgrade.js"></script>

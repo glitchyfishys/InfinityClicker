@@ -9,7 +9,7 @@ var player = {
     immensityupgrades: [],
     immensityupgradereqirements: [],
     uniopen: false,
-    auto: false,
+    auto: true,
     glyphrespec: false,
     money: {
         number: DC.D1,
@@ -198,7 +198,15 @@ function tab(left = true){
 }
 
 function tabchange(){
-    layers.forEach(x => document.getElementById("layer" + x).style.left = `calc( ${(50 * (layers.indexOf(x) - player.scroll.tab - 1)) + 25}% - 137.5px`);
+        if(game.isMobile) {layers.forEach(x => {
+        document.getElementById("layer" + x).style.left = `calc( ${(50 * (layers.indexOf(x) - player.scroll.tab - 2))}%`;
+        if(player.scroll.tab+2 != layers.indexOf(x)) document.getElementById("layer" + x).classList.add("hidden");
+        else document.getElementById("layer" + x).classList.remove("hidden");
+        });
+        stuff.style.marginTop = "270px";
+        stuff.style.zoom = "0.65";
+        }
+    else layers.forEach(x => document.getElementById("layer" + x).style.left = `calc( ${(50 * (layers.indexOf(x) - player.scroll.tab - 1)) + 25}% - 137.5px`);
     Reality.RenderGlyphs();
     Immensity.renderBHs();
 }
@@ -222,12 +230,9 @@ function maxupgrades(id = "infinity"){
 }
 
 function startup(){
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if(isMobile) {
-        modal.showtext("Mobile UI<br>sorry mobile is very broken right now, UI is diffent from PC<br> make an issue on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll get to it at some point");
-        gamemodel.style.zoom = 4;
-        gamemodel.style.zIndex= 101;
-        return;
+    if(game.isMobile) {
+        modal.showtext("Mobile UI<br>sorry mobile is a WIP, help find bugs.<br>make an issue(s) on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll try and fix it");
+        gamemodel.style.zIndex = 5;
     }
     immensityupgadedata.forEach(x => ImmensityUpgrades.push(new upgrade(x)));
     realityupgadedata.forEach(x => RealityUpgrades.push(new upgrade(x)));
@@ -253,18 +258,9 @@ function startup(){
 
     toggleuni(false);
     setInterval(gameloop, 25);
-    setInterval(savegame, 30000);
+    setInterval(savegame, 60000);
     kdstart();
     TN.style.opacity = "0";
-}
-
-function startsong(skip = false){
-    if(song.ended || song.played.length == 0 || skip){;
-        const n = Math.floor(Math.random() * songs.length);
-        notify("playing " + songs[n].split(".")[0] + " by " + songcreaters[n], 5, "#ff00ff");
-        song.src = "./songs/" + songs[n];
-        song.play();
-    }
 }
 
 function gameloop(deltaticks = 0){
@@ -286,7 +282,7 @@ function gameloop(deltaticks = 0){
         Time.totaltime = Time.totaltime.add(Decimal.mul(game.speed,Deltatime));
 
         game.frametick++;
-        game.frametick = game.frametick % 4;
+        game.frametick = game .isMobile ? game.frametick % 10 : game.frametick % 4;
     
         if(game.frametick == 0) UIupdate();
     }
@@ -294,50 +290,40 @@ function gameloop(deltaticks = 0){
 }
 
 function UIupdate(){
-    clicker.innerHTML = "muliply your number by " + nummul();
-    number.innerHTML = "your number is " + `<span style="color: skyblue;">${Currency.number}<span/>`;
-    if(game.progress > 1) number.innerHTML += "<br>you have " + `<span style="color: orange;">${Currency.IP} infinity points<span/>`;
-    if(game.progress > 2) number.innerHTML += "<br>you have " + `<span style="color: purple;">${Currency.EP} eternity points<span/>`;
-    if(game.progress > 3) number.innerHTML += "<br>you have " + `<span style="color: lime;">${Currency.RP} reality points<span/>`;
-    if(game.progress > 4) number.innerHTML += "<br>you have " + `<span style="color: red;">${Currency.IM} immensity points<span/>`;
+
+    clicker.innerHTML = "multiply your number by " + format(nummul());
+    number.innerHTML = "your number is " + `<span style="color: skyblue;">${format(Currency.number)}<span/>`;
+    if(game.progress > 1) number.innerHTML += "<br>you have " + `<span style="color: orange;">${format(Currency.IP)} infinity points<span/>`;
+    if(game.progress > 2) number.innerHTML += "<br>you have " + `<span style="color: purple;">${format(Currency.EP)} eternity points<span/>`;
+    if(game.progress > 3) number.innerHTML += "<br>you have " + `<span style="color: lime;">${format(Currency.RP)} reality points<span/>`;
+    if(game.progress > 4) number.innerHTML += "<br>you have " + `<span style="color: red;">${format(Currency.IM)} immensity points<span/>`;
     
     (infinity.caninfinity && InfinityUpgrades[13].brought) ? infinityreset.classList.remove("hidden") : infinityreset.classList.add("hidden");
     Eternity.caneternity ? eternityreset.classList.remove("hidden") : eternityreset.classList.add("hidden");
     Reality.canreality ? realityreset.classList.remove("hidden") : realityreset.classList.add("hidden");
     Immensity.canimmensity ? immensityreset.classList.remove("hidden") : immensityreset.classList.add("hidden");
-    infinityreset.innerHTML = "infinity for " + infinity.gainedinfinitypoints.toString(2) + " IP";
-    eternityreset.innerHTML = "eternity for " + Eternity.gainedeternitypoints.toString(2) + " EP";
-    realityreset.innerHTML = "reality for " + Reality.gainedrealitypoints.toString(2) + " RP";
-    immensityreset.innerHTML = "immensity for " + Immensity.gainedimmensitypoints.toString(2) + " IM";
+    infinityreset.innerHTML = "infinity for " + format(infinity.gainedinfinitypoints) + " IP";
+    eternityreset.innerHTML = "eternity for " + format(Eternity.gainedeternitypoints) + " EP";
+    realityreset.innerHTML = "reality for " + format(Reality.gainedrealitypoints) + " RP";
+    immensityreset.innerHTML = "immensity for " + format(Immensity.gainedimmensitypoints) + " IM";
     
     if(infinity.caninfinity && !InfinityUpgrades[13].brought) infinity.reset();
 
     glyphrespec.style.borderColor = player.glyphrespec ? "lime" : "red";
     Immensity.renderBHs();
     hoverUIupdatepos();
-    FPS.innerHTML = "fps: " + (6 / Deltatime).toFixed(2) + "<br>tps: " + (1 / Deltatime).toFixed(2);
-    if(BlackHoles.length > 0){
-        BH1.innerHTML = "upgrade black hole interval<br> cost: " + BlackHoles[0].intervalcost + " IM";
-        BH2.innerHTML = "upgrade black hole power<br> cost: " + BlackHoles[0].powercost + " IM";
-        BH3.innerHTML = "upgrade black hole length<br> cost: " + BlackHoles[0].lengthcost + " IM";
 
-        BlackHoles[0].intervalcost.lte(Currency.IM) ? BH1.classList.add("buyable") : BH1.classList.remove("buyable");
-        BlackHoles[0].powercost.lte(Currency.IM) ? BH2.classList.add("buyable") : BH2.classList.remove("buyable");
-        BlackHoles[0].lengthcost.lte(Currency.IM) ? BH3.classList.add("buyable") : BH3.classList.remove("buyable");
-        
-        if(BlackHoles[0].ispermenant){
-            BHinfo.innerHTML = `the black hole is mulipling game speed by ${BlackHoles[0].power.toString(2)}`
-            BH1.classList.add("hidden");
-            BH3.classList.add("hidden");
-        }
-        else{
-            BH1.classList.remove("hidden");
-            BH3.classList.remove("hidden");
-            BlackHoles[0].isactive ? 
-            BHinfo.innerHTML = `the black hole is active for ${BlackHoles[0].activetime.toFixed(2).toString()} seconds<br> mulipling game speed by ${BlackHoles[0].power.toString(2)}`
-            : BHinfo.innerHTML = `the black hole will activate in ${(BlackHoles[0].interval - BlackHoles[0].timer).toFixed(2).toString()} seconds <br> while active mulipliys game speed by ${BlackHoles[0].power.toString(2)}`
-        }
+    FPS.innerHTML = game.isMobile ? "" : "fps: " + (6 / Deltatime).toFixed(2) + "<br>tps: " + (1 / Deltatime).toFixed(2);
+
+    if(game.isMobile){
+        document.styleSheets[0].disabled = true;
+        document.styleSheets[1].disabled = false;
     }
+    else{
+        document.styleSheets[0].disabled = false;
+        document.styleSheets[1].disabled = true;
+    }
+
 }
 
 function autotick(){
@@ -427,6 +413,7 @@ function loadgame(){
     InfinityUpgrades.forEach(x => x.tick());
     EternityUpgrades.forEach(x => x.tick());
     RealityUpgrades.forEach(x => x.tick());
+    ImmensityUpgrades.forEach(x => x.tick());
 
     document.getElementById("INF-UG").scrollTo(0, player.scroll.infinity);
     document.getElementById("ETR-UG").scrollTo(0, player.scroll.eternity);
@@ -449,8 +436,8 @@ function loadgame(){
     if(ImmensityUpgrades[6].brought) glyphselect.classList.remove("hidden");
     
     const ticklength = (Date.now() - sav.lastonlinetick) / 1000;
-    for(let t=0; t < 100; t++) gameloop(ticklength / 100);
-    notify(ticklength + " seconds of offline time used over 100 ticks", 3, "lightgreen")
+    for(let t=0; t < 1000; t++) gameloop(ticklength / 1000);
+    notify(ticklength + " seconds of offline time used over 1000 ticks", 4, "lightgreen")
 }
 
 
@@ -517,6 +504,9 @@ game = {
         if(BlackHoles.length == 0) return DC.D1;
         return BlackHoles[0].effect;
     },
+    get isMobile() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
 }
 
 // this run ticks fast
@@ -586,6 +576,7 @@ function addnewupgrade(mainname = "INF-UG"){
     child.classList.add("upgrade");
     return child;
 }
+
 
 const Currency = {
     get number(){
@@ -719,12 +710,12 @@ const Time = {
     },
 
     format(time = DC.D1){
-        if(time.lt(1)) return Decimal.div(time, this.timechanges.milliseconds).toString(0,2) + this.times.milliseconds;
-        if(time.gte(3600 * 24 * 365)) return Decimal.div(time, this.timechanges.years).toString(2,2) + this.times.years;
-        if(time.gte(3600 * 24)) return Decimal.div(time, this.timechanges.days).toString(2,2) + this.times.days;
-        if(time.gte(3600)) return Decimal.div(time, this.timechanges.hours).toString(2,2) + this.times.hours;
-        if(time.gte(60)) return Decimal.div(time, this.timechanges.minutes).toString(2,2) + this.times.minutes;
-        if(time.gte(1)) return Decimal.div(time, this.timechanges.seconds).toString(2,2) + this.times.seconds;
+        if(time.lt(1)) return format(Decimal.div(time, this.timechanges.milliseconds)) + this.times.milliseconds;
+        if(time.gte(3600 * 24 * 365)) return format(Decimal.div(time, this.timechanges.years)) + this.times.years;
+        if(time.gte(3600 * 24)) return format(Decimal.div(time, this.timechanges.days)) + this.times.days;
+        if(time.gte(3600)) return format(Decimal.div(time, this.timechanges.hours)) + this.times.hours;
+        if(time.gte(60)) return format(Decimal.div(time, this.timechanges.minutes)) + this.times.minutes;
+        if(time.gte(1)) return format(Decimal.div(time, this.timechanges.seconds)) + this.times.seconds;
         
     },
 
@@ -752,4 +743,14 @@ const Time = {
         years: (3600 * 24 * 365),
 
     },
+}
+
+function format(num = DC.D0){
+    return isNaN(num.layer) || isNaN(num.sign) || isNaN(num.mag) ? "NaN" : num.mag === Number.POSITIVE_INFINITY || num.layer === Number.POSITIVE_INFINITY ? 1 === num.sign ? "Infinity" : "-Infinity" : 0 === num.layer ? num.mag < 1e5 && num.mag > 1e-5 || 0 === num.mag ? (num.sign * num.mag).toFixed(2).toString() : num.m.toFixed(2) + "e" + shortnum(num.e,0) : 1 === num.layer ? num.m.toFixed(2) + "e" + (num.e > 1e5 ? shortnum(num.e) : shortnum(num.e,0)) : num.layer <= 5 ? (-1 === num.sign ? "-" : "") + "e".repeat(num.layer) + shortnum(num.mag) : (-1 === num.sign ? "-" : "") + "(e^" + num.layer + ")" + shortnum(num.mag);
+}
+
+function shortnum(num = 0,pls = 2){
+    if(num < 1e5) return num.toFixed(pls);
+    let l = Math.log10(num);
+    return (num / 10 ** l).toFixed(pls) + "e" + Math.floor(l);
 }

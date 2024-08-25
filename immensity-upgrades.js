@@ -6,7 +6,7 @@ const immensityupgadedata = [
             return DC.D25;
         },
         decription: "gain one reality point every 25 minutes <br> also 25x RP gain",
-        effectdisplay: value => "1/1500 RP sec and x" + value.toString(1) + " RP",
+        effectdisplay: value => "1/1500 RP sec and x" + format(value,1) + " RP",
         cost: DC.D1,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
@@ -62,7 +62,7 @@ const immensityupgadedata = [
             return Time.totaltime.add(1).max(1);
         },
         decription: "IP EP RP and IM gain are multiplied by total time played",
-        effectdisplay: value => `x${value.toString(1)} IP,EP,<br>RP/10 and IM ^0.2`,
+        effectdisplay: value => `x${format(value,1)} IP,EP,<br>x${format(value.div(10),1)} RP and x${format(value.pow(0.2),1)} IM`,
         cost: DC.D1,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
@@ -124,7 +124,7 @@ const immensityupgadedata = [
             return Currency.IMMs.pow(4).max(1);
         },
         decription: "immensity point gains a multiplier based on immensitys",
-        effectdisplay: value => `x${value.toString(1)}`,
+        effectdisplay: value => `x${format(value,1)}`,
         cost: DC.D100,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
@@ -135,6 +135,7 @@ const immensityupgadedata = [
 ]
 
 // how to add black hole: onbuy: () => player.Blackhole[0] = new BlackHole(0,0,0,false);
+// only the first does somthing
 const ImmensityUpgrades = [];
 
 let BlackHoles = [];
@@ -158,7 +159,7 @@ const Immensity = {
         let gain = DC.D1;
 
 
-        gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).root(5).max(1));
+        gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).pow(0.2).max(1));
         
 
         if(!this.broken) return gain;
@@ -218,25 +219,54 @@ const Immensity = {
 
         Blackhole.style.width = BlackHoles[0].size + "px";
         Blackhole.style.height = BlackHoles[0].size + "px";
+        if(game.isMobile){
+            BHinfo.style.width = "150px";
+            BHinfo.style.marginLeft = "20px";
+            BHinfo.style.fontSize = "12px";
 
-        BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 10%)`;
-
-        Blackhole.style.left = `calc(${(50 * (3-player.scroll.tab))}%)`;
+        }
+        else{
+            BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 112.5px)`;
+            Blackhole.style.left = `calc(${(50 * (3-player.scroll.tab))}%)`;
+        }
 
         if(player.scroll.tab == 2) {BHbuttons.classList.remove("hidden");}
         else {BHbuttons.classList.add("hidden");}
+
+        BH1.innerHTML = "upgrade black hole interval by 30%<br> cost: " + format(BlackHoles[0].intervalcost) + " IM";
+        BH2.innerHTML = "upgrade black hole power by 25%<br> cost: " + format(BlackHoles[0].powercost) + " IM";
+        BH3.innerHTML = "upgrade black hole duration 20%<br> cost: " + format(BlackHoles[0].lengthcost) + " IM";
+    
+        BlackHoles[0].intervalcost.lte(Currency.IM) ? BH1.classList.add("buyable") : BH1.classList.remove("buyable");
+        BlackHoles[0].powercost.lte(Currency.IM) ? BH2.classList.add("buyable") : BH2.classList.remove("buyable");
+        BlackHoles[0].lengthcost.lte(Currency.IM) ? BH3.classList.add("buyable") : BH3.classList.remove("buyable");
+        
+        if(BlackHoles[0].ispermenant){
+            BHinfo.innerHTML = `the black hole is mulipling game speed by ${BlackHoles[0].power.toString(2)}`
+            BH1.classList.add("hidden");
+            BH3.classList.add("hidden");
+        }
+        else{
+            BH1.classList.remove("hidden");
+            BH3.classList.remove("hidden");
+            BlackHoles[0].isactive ? 
+            BHinfo.innerHTML = `the black hole is active for ${BlackHoles[0].activetime.toFixed(2).toString()} seconds<br> mulipling game speed by ${BlackHoles[0].power.toString(2)}`
+            : BHinfo.innerHTML = `the black hole will activate in ${(BlackHoles[0].interval - BlackHoles[0].timer).toFixed(2).toString()} seconds <br> while active mulipliys game speed by ${BlackHoles[0].power.toString(2)}`
+        }
+        
     }
 }
 
 class BlackHole {
-    constructor(data = { powerUGs: 1, intervalUGs: 1, lengthUGs: 1, active: false, timer: 0}){
+    constructor(data = { powerUGs: 0, intervalUGs: 0, lengthUGs: 0, active: false, timer: 0}){
         this.powerUGs = (data.powerUGs != undefined ? data.powerUGs : 0);
         this.intervalUGs = (data.intervalUGs != undefined ? data.intervalUGs : 0);
         this.lengthUGs = (data.lengthUGs != undefined ? data.lengthUGs : 0);
+        this.timer = (data.timer != undefined ? data.timer : 0);
         if(data.active != undefined) this.active = data.active;
     }
 
-    baseinterval = 1800;
+    baseinterval = 900;
     baselength = 10;
     active = false;
     timer = 0;

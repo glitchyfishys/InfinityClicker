@@ -79,7 +79,7 @@ class upgrade{
     ugtext(){
         this.displayed();
         let text =  (typeof this.decription == "function") ? this.decription() : this.decription;
-        text +=  "<br>cost: " + this.cost + " " + this.currencykey;
+        text +=  "<br>cost: " + format(this.cost) + " " + this.currencykey;
         if(!this.HasMetUnlockRequirment || (this.reqirementtext != "" && kd.SHIFT.isDown())) text += "<br>requirement: " + this.reqirementtext;
         if((this.brought && this.reqirementtext == "" ) || (this.brought && this.reqirementtext != "" && !kd.SHIFT.isDown())) text +=  "<br>effect: " + this.effectdisplay(this.effectordefault(1));
         
@@ -97,7 +97,7 @@ class upgrade{
     effectordefault(def = 1){
         if(this.type == "unlock") return this.brought;
         let e = this.effect();
-        if(e.lt(def) || e.isNaN() || e.m == 0) return new Decimal(def);
+        if(e.lt(def) || e.isNan() || e.m == 0) return new Decimal(def);
         if(this.brought || this.type == "reset") return e;
         return new Decimal(def);
     }

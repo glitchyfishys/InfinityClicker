@@ -11,7 +11,7 @@ function notify(text, sec = 1, color = "#FFFF00") {
     
     child.style.backgroundColor = color;
     
-    setTimeout(() => child.style.transform = "translateX(-160px)", 33);
+    game.isMobile ? setTimeout(() => child.style.transform = "translateX(-110px)", 33) : setTimeout(() => child.style.transform = "translateX(-160px)", 33);
 
     setTimeout(() => {child.style.transform = "translateX(0px)"; setTimeout(() => {child.remove();}, 300);}, sec * 1000);
 

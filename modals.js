@@ -28,6 +28,35 @@ const modal ={
         this.openid = 1;
     },
 
+    showchoose(text = "hello", funct = [{text: "hi", onclick: () => "foot"}]) {
+        gamemodel.innerHTML = "";
+        
+        let displaytext = "";
+        Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
+
+        gamemodel.innerHTML += displaytext;
+        
+        const cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "X";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => this.close();
+
+        if(Array.isArray(funct)){
+            funct.forEach(x => {
+                gamemodel.appendChild(document.createElement("br"));
+                const bu = gamemodel.appendChild(document.createElement("button"));
+                bu.onclick = x.onclick;
+                bu.innerHTML = x.text;
+                bu.style.width = "100px";
+                bu.style.height = "20px";
+                
+            });
+        }
+
+        modal.show();
+        this.openid = 1;
+    },
+
     // infinity Eternity Reality Immensity new layer
     showreset(layer = "infinity", text = "") {
         gamemodel.innerHTML = "";
@@ -115,26 +144,26 @@ const modal ={
         gamemodel.innerHTML = "game info<br><br>";
 
         let al = gamemodel.appendChild(document.createElement("span"));
-        al.innerHTML = `you highest number amount is ${Currency.highestnumber.toString(2,2)}<br>you have played for ${Time.format(Time.totaltime)}<br><br>`;
+        al.innerHTML = `you highest number amount is ${format(Currency.highestnumber)}<br>you have played for ${Time.format(Time.totaltime)}<br><br>`;
 
         if(game.progress > 1){
             let al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `infinity<br>you have infinityed ${Currency.INFs.toString(0,2)} times ${game.progress > 2 ? "this eternity" : ""}<br> you have been in this infinity for ${Time.format(Time.thisinfinity)} seconds and your best infinity time is ${Time.format(Time.bestinfinity)} seconds <br><br>`;
+            al.innerHTML = `infinity<br>you have infinityed ${format(Currency.INFs)} times ${game.progress > 2 ? "this eternity" : ""}<br> you have been in this infinity for ${Time.format(Time.thisinfinity)} seconds and your best infinity time is ${Time.format(Time.bestinfinity)} seconds <br><br>`;
         }
 
         if(game.progress > 2){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `eternity<br>you have eternityed ${Currency.ETRs.toString(0,2)} times ${game.progress > 3 ? "this reality" : ""}<br> you have been in this eternity for ${Time.format(Time.thiseternity)} seconds and your best eternity time is ${Time.format(Time.besteternity)} seconds <br><br>`;
+            al.innerHTML = `eternity<br>you have eternityed ${format(Currency.ETRs)} times ${game.progress > 3 ? "this reality" : ""}<br> you have been in this eternity for ${Time.format(Time.thiseternity)} seconds and your best eternity time is ${Time.format(Time.besteternity)} seconds <br><br>`;
         }
 
         if(game.progress > 3){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `reality<br>you have realityed ${Currency.REAs.toString(0,2)} times ${game.progress > 4 ? "this immensity" : ""}<br> you have been in this reality for ${Time.format(Time.thisreality)} seconds and your best reality time is ${Time.format(Time.bestreality)} seconds <br><br>`;
+            al.innerHTML = `reality<br>you have realityed ${format(Currency.REAs)} times ${game.progress > 4 ? "this immensity" : ""}<br> you have been in this reality for ${Time.format(Time.thisreality)} seconds and your best reality time is ${Time.format(Time.bestreality)} seconds <br><br>`;
         }
 
         if(game.progress > 4){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `immensity<br>you have immensityed ${Currency.IMMs.toString(0,2)} times <br> you have been in this immensity for ${Time.format(Time.thisimmensity)} seconds and your best immensity time is ${Time.format(Time.bestimmensity)} seconds`;
+            al.innerHTML = `immensity<br>you have immensityed ${format(Currency.IMMs)} times <br> you have been in this immensity for ${Time.format(Time.thisimmensity)} seconds and your best immensity time is ${Time.format(Time.bestimmensity)} seconds`;
         }
 
         let cl = gamemodel.appendChild(document.createElement("button"));
@@ -149,12 +178,26 @@ const modal ={
     showhotkeys(){
         gamemodel.innerHTML = "hotkeys<br>";
 
+        if(game.isMobile){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `<br> you are on mobile and can not use hotkeys<br>sorry`;
+            let cl = gamemodel.appendChild(document.createElement("button"));
+            cl.innerHTML = "x";
+            cl.classList.add("closemodalbutton");
+            cl.onclick = () => modal.close();
 
-        let al = gamemodel.appendChild(document.createElement("span"));
-        al.innerHTML = `<br>shift clicking up/down move 5x at much`;
+            modal.show();
+            this.openid = 5;
+            return;
+        }
+
+        if(game.progress == 1){
+            let al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `<br> none yet`;
+        }
 
         if(game.progress > 1){
-            al = gamemodel.appendChild(document.createElement("span"));
+            let al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = `<br>infinity = "I" <br> buy max infinity upgrades = "M" <br><br>`;
         }
 
@@ -165,12 +208,14 @@ const modal ={
 
         if(game.progress > 3){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L"<br>shift clicking on a glyph removes it<br><br>`;
+            al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L" <br>`;
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = `toggle auto buys with alt + A<br><br>`;
         }
 
         if(game.progress > 4){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `immensity = "N" <br> holding shift shows requirements`;
+            al.innerHTML = `immensity = "N" <br>`;
         }
 
         let cl = gamemodel.appendChild(document.createElement("button"));

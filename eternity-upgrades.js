@@ -6,7 +6,7 @@ const eternityupgadedata = [
             return DC.D3;
         },
         decription: "gain one infinity point every 10 seconds <br> also triples IP gain",
-        effectdisplay: value => "1/10 IP sec and x" + value.toString(1) + " IP",
+        effectdisplay: value => "1/10 IP sec and x" + format(value) + " IP",
         cost: DC.D1,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -18,7 +18,7 @@ const eternityupgadedata = [
             return DC.D2;
         },
         decription: "half the time of the first eternity upgrade",
-        effectdisplay: value => "auto IP interval /" + value.toString(1),
+        effectdisplay: value => "auto IP interval /" + format(value),
         cost: DC.D2,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -30,7 +30,7 @@ const eternityupgadedata = [
             return DC.D2;
         },
         decription: "double the auto gain of the first eternity upgrade",
-        effectdisplay: value => "x" + value.toString(1) + " auto IP",
+        effectdisplay: value => "x" + format(value) + " auto IP",
         cost: DC.D2,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -42,7 +42,7 @@ const eternityupgadedata = [
             return DC.D10;
         },
         decription: "10x EP gain",
-        effectdisplay: value =>"x" + value.toString(1) + " EP",
+        effectdisplay: value =>"x" + format(value) + " EP",
         cost: DC.D5,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -54,7 +54,7 @@ const eternityupgadedata = [
             return DC.D7;
         },
         decription: "start with the first 7 infinity upgrades",
-        effectdisplay: value => "keeped " + value.toString(0) + " infinity upgrades",
+        effectdisplay: value => "keeped " + format(value) + " infinity upgrades",
         cost: DC.D15,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -67,7 +67,7 @@ const eternityupgadedata = [
             return DC.D9;
         },
         decription: "start with the first 9 infinity upgrades",
-        effectdisplay: value => "keeped " + value.toString(0) + " infinity upgrades",
+        effectdisplay: value => "keeped " + format(value) + " infinity upgrades",
         cost: DC.D25,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -80,7 +80,7 @@ const eternityupgadedata = [
             return DC.D5;
         },
         decription: "gain 5x more IP and 50x auto IP",
-        effectdisplay: value => "x" + value.toString(1) + " IP, x50 Auto IP",
+        effectdisplay: value => "x" + format(value) + " IP, x50 Auto IP",
         cost: DC.D50,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -92,7 +92,7 @@ const eternityupgadedata = [
             return infinity.gainedinfinitypoints.div(1e4);
         },
         decription: "auto IP is the amount you would gain / 1e4",
-        effectdisplay: value => value.toString(1) + " IP/s" ,
+        effectdisplay: value => format(value) + " IP/s" ,
         cost: DC.D100,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -104,7 +104,7 @@ const eternityupgadedata = [
             return DC.D14;
         },
         decription: "start with infinity broken",
-        effectdisplay: value => "keeped " + value.toString(0) + " infinity upgrades",
+        effectdisplay: value => "keeped " + format(value) + " infinity upgrades",
         cost: DC.D250,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -117,7 +117,7 @@ const eternityupgadedata = [
             return DC.D5;
         },
         decription: "gain 5 times more EP",
-        effectdisplay: value => "x" + value.toString(1)  + " EP",
+        effectdisplay: value => "x" + format(value)  + " EP",
         cost: DC.D500,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -129,7 +129,7 @@ const eternityupgadedata = [
             return DC.D4;
         },
         decription: "gain 4 times more EP, auto IP is 5 times faster and gain 100 times more",
-        effectdisplay: value => "x" + value.toString(1) + " EP, auto IP interval /5, auto IP gain x100",
+        effectdisplay: value => "x" + format(value) + " EP, auto IP interval /5, auto IP gain x100",
         cost: DC.De3,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -141,7 +141,7 @@ const eternityupgadedata = [
             return DC.D18;
         },
         decription: "keep all but the last 3 infinity upgrades",
-        effectdisplay: value => "keep " + value.toString(0) + " infinity upgrades",
+        effectdisplay: value => "keep " + format(value) + " infinity upgrades",
         cost: DC.D2e3,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -154,7 +154,7 @@ const eternityupgadedata = [
             return DC.D21;
         },
         decription: "keep all infinity upgrades and break infinity IP",
-        effectdisplay: value => "keep " + value.toString(0) + " infinity upgrades and uncaped IP",
+        effectdisplay: value => "keep " + format(value) + " infinity upgrades and uncaped IP",
         cost: DC.D5e3,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -167,7 +167,7 @@ const eternityupgadedata = [
             return DC.D2;
         },
         decription: "IP gain is ^2",
-        effectdisplay: value => "^" + value.toString(0) + " IP",
+        effectdisplay: value => "^" + format(value) + " IP",
         cost: DC.De5,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -191,7 +191,7 @@ const eternityupgadedata = [
             return DC.D5;
         },
         decription: "number mulitplier ^5",
-        effectdisplay: value => `^${value.toString(0)} number mulitplier`,
+        effectdisplay: value => `^${format(value)} number mulitplier`,
         cost: new Decimal(2.5e7),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -200,10 +200,10 @@ const eternityupgadedata = [
     {
         id: 16,
         effect: () => {
-            return Currency.IP.log(10).pow(2).mul(100);
+            return Currency.IP.log10().pow(2).mul(100);
         },
         decription: "gain more IP based on IP",
-        effectdisplay: value => `x${value.toString(0)} IP`,
+        effectdisplay: value => `x${format(value)} IP`,
         cost:new Decimal(7.5e7),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -215,7 +215,7 @@ const eternityupgadedata = [
             return Currency.EP.log(10).pow(0.5).min(5);
         },
         decription: "gain more EP based on EP up to 5 times",
-        effectdisplay: value => `x${value.toString(1)} EP`,
+        effectdisplay: value => `x${format(value)} EP`,
         cost: new Decimal(2e8),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -228,7 +228,7 @@ const eternityupgadedata = [
             return Time.thiseternity.add(1).max(1);
         },
         decription: "gain more EP based on time in this eternity",
-        effectdisplay: value => `x${value.toString(1)} EP`,
+        effectdisplay: value => `x${format(value)} EP`,
         cost: DC.D2e11,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -240,7 +240,7 @@ const eternityupgadedata = [
             return DC.D2;
         },
         decription: "EP gain ^ 2",
-        effectdisplay: value => `^${value.toString(0)} EP`,
+        effectdisplay: value => `^${format(value)} EP`,
         cost: DC.De12,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -252,7 +252,7 @@ const eternityupgadedata = [
             return DC.D3;
         },
         decription: "EP gain ^ 3",
-        effectdisplay: value => `^${value.toString(0)} EP`,
+        effectdisplay: value => `^${format(value)} EP`,
         cost: DC.De19,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -264,7 +264,7 @@ const eternityupgadedata = [
             return DC.D3;
         },
         decription: "EP gain ^ 3 again",
-        effectdisplay: value => `^${value.toString(0)} EP`,
+        effectdisplay: value => `^${format(value)} EP`,
         cost: DC.De48,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -288,7 +288,7 @@ const eternityupgadedata = [
             return DC.D2;
         },
         decription: "EP gain ^2 again",
-        effectdisplay: value => `^${value.toString(1)} EP`,
+        effectdisplay: value => `^${format(value)} EP`,
         cost: DC.De140,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -300,7 +300,7 @@ const eternityupgadedata = [
             return DC.D100;
         },
         decription: "IP gain ^100",
-        effectdisplay: value => `^${value.toString(0)} IP`,
+        effectdisplay: value => `^${format(value)} IP`,
         cost: DC.De280,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -365,7 +365,7 @@ const Eternity = {
         if(RealityUpgrades[14].brought) speed = speed.mul(10);
         if(RealityUpgrades[16].brought) speed = speed.mul(10);
         
-        if(RealityUpgrades[4].brought) gain = this.gainedeternitypoints;
+        if(RealityUpgrades[4].brought && this.gainedeternitypoints.gt(0)) gain = this.gainedeternitypoints;
         speed = speed.mul(game.speed);
 
         if(RealityUpgrades[0].brought) Currency.EP = Currency.EP.add(gain.mul(speed).mul(Deltatime)).min(this.limit);

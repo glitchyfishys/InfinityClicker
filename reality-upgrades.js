@@ -6,7 +6,7 @@ const realityupgadedata = [
             return DC.D8;
         },
         decription: "gain one eternity point every 60 seconds <br> also octuples EP gain <br> and autobuy infinity upgrades",
-        effectdisplay: value => "1/60 EP sec and x" + value.toString(1) + " EP",
+        effectdisplay: value => "1/60 EP sec and x" + format(value) + " EP",
         cost: DC.D1,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -18,7 +18,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "half the EP interval and keep the first eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep" + value.toString(0) + " eternity upgrade",
+        effectdisplay: value => "auto EP interval /2 and keep" + format(value) + " eternity upgrade",
         cost: DC.D2,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -31,7 +31,7 @@ const realityupgadedata = [
             return DC.D3;
         },
         decription: "x2 auto EP and keep the 3 eternity upgrade",
-        effectdisplay: value => "2x auto EP and keep" + value.toString(0) + " eternity upgrade",
+        effectdisplay: value => "2x auto EP and keep" + format(value) + " eternity upgrade",
         cost: DC.D3,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -44,7 +44,7 @@ const realityupgadedata = [
             return DC.D5;
         },
         decription: "half the time and keep the 5 eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep" + value.toString(0) + " eternity upgrade",
+        effectdisplay: value => "auto EP interval /2 and keep" + format(value) + " eternity upgrade",
         cost: DC.D5,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -69,7 +69,7 @@ const realityupgadedata = [
             return DC.De3;
         },
         decription: "start with 10000 IP and EP",
-        effectdisplay: value => `${value.toString(0)} starting IP and EP`,
+        effectdisplay: value => `${format(value)} starting IP and EP`,
         cost: DC.D25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -82,7 +82,7 @@ const realityupgadedata = [
             return DC.De38;
         },
         decription: "IP and EP reqirements for Eternitys and Realitys are 1e38x lower",
-        effectdisplay: value => `x${value.toString(0)} lower IP and EP requirement`,
+        effectdisplay: value => `x${format(value)} lower IP and EP requirement`,
         cost: DC.D30,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -94,7 +94,7 @@ const realityupgadedata = [
             return DC.D3;
         },
         decription: "break Infinity EP and auto EP is 3 times faster",
-        effectdisplay: value => `auto EP interval /${value.toString(0)} and uncap EP`,
+        effectdisplay: value => `auto EP interval /${format(value)} and uncap EP`,
         cost: DC.D35,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -103,10 +103,10 @@ const realityupgadedata = [
     {
         id: 8,
         effect: () => {
-            return Currency.IP.log(10).root(20).add(1).min(2.5);
+            return Currency.IP.log(10).pow(1/20).add(1).min(2.5);
         },
         decription: "5 times RP and glyph level is higher based on IP, caped at 2x",
-        effectdisplay: value => `x5 RP and x${value.toString(1)} glyph level`,
+        effectdisplay: value => `x5 RP and x${format(value)} glyph level`,
         cost: DC.D50,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -115,10 +115,10 @@ const realityupgadedata = [
     {
         id: 9,
         effect: () => {
-            return Currency.EP.log(10).root(20).add(1).min(2.5);
+            return Currency.EP.log(10).pow(1/20).add(1).min(2.5);
         },
         decription: "5 times RP and glyph power is higher based on EP, caped at 2x",
-        effectdisplay: value => `x5 RP and x${value.toString(1)} glyph power`,
+        effectdisplay: value => `x5 RP and x${format(value)} glyph power`,
         cost: DC.D50,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -130,7 +130,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain two glyphs on reality instead of one",
-        effectdisplay: value => `+${value.toString(0)} glyph on reality`,
+        effectdisplay: value => `+${format(value)} glyph on reality`,
         cost: DC.D500,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -142,7 +142,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "glyph level and power is better",
-        effectdisplay: value => `x${value.toString(1)} glyph level and power`,
+        effectdisplay: value => `x${format(value)} glyph level and power`,
         cost: DC.De3,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -154,7 +154,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain an extra glyph on reality and one more glyph slot",
-        effectdisplay: value => `+${value.toString(0)} glyph on reality and +1 glyph slot`,
+        effectdisplay: value => `+${format(value)} glyph on reality and +1 glyph slot`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -167,7 +167,7 @@ const realityupgadedata = [
             return DC.D25;
         },
         decription: "keep all eternity upgrades and Eternity time Upgrade start at 1 minute",
-        effectdisplay: value => `keeped ${value.toString(0)} eternity upgrades`,
+        effectdisplay: value => `keeped ${format(value)} eternity upgrades`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -180,7 +180,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "auto EP is 10 times faster",
-        effectdisplay: value => `auto EP interval /${value.toString(1)}`,
+        effectdisplay: value => `auto EP interval /${format(value)}`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -192,7 +192,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain another glyph slot",
-        effectdisplay: value => `+${value.toString(1)} glyph slot`,
+        effectdisplay: value => `+${format(value)} glyph slot`,
         cost: DC.De15,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -205,7 +205,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "faster auto IP and EP",
-        effectdisplay: value => `IP and EP interval /${value.toString(1)}`,
+        effectdisplay: value => `IP and EP interval /${format(value)}`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -217,7 +217,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "glyph level and power is higher",
-        effectdisplay: value => `x${value.toString(1)} glyph level and power`,
+        effectdisplay: value => `x${format(value)} glyph level and power`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -229,7 +229,7 @@ const realityupgadedata = [
             return DC.D3;
         },
         decription: "gain 3 more glyphs on reality",
-        effectdisplay: value => `+${value.toString(1)} glyphs on reality`,
+        effectdisplay: value => `+${format(value)} glyphs on reality`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -253,7 +253,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "10 time RP gain",
-        effectdisplay: value => `x${value.toString(0)} RP gain`,
+        effectdisplay: value => `x${format(value)} RP gain`,
         cost: DC.De28,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -265,7 +265,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "10 time RP gain again",
-        effectdisplay: value => `x${value.toString(0)} RP gain`,
+        effectdisplay: value => `x${format(value)} RP gain`,
         cost: DC.De45,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -277,7 +277,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "and 10 time RP gain again",
-        effectdisplay: value => `x${value.toString(0)} RP gain`,
+        effectdisplay: value => `x${format(value)} RP gain`,
         cost: DC.De65,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -289,7 +289,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "stronger glyphs",
-        effectdisplay: value => `x${value.toString(0)} glyph level and power`,
+        effectdisplay: value => `x${format(value)} glyph level and power`,
         cost: DC.De80,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -301,7 +301,7 @@ const realityupgadedata = [
             return DC.D25;
         },
         decription: "even stronger glyphs",
-        effectdisplay: value => `x${value.toString(0)} glyph level and power`,
+        effectdisplay: value => `x${format(value)} glyph level and power`,
         cost: DC.De105,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -313,7 +313,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "RP gain is squared",
-        effectdisplay: value => `^${value.toString(0)} RP`,
+        effectdisplay: value => `^${format(value)} RP`,
         cost: DC.De140,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -325,7 +325,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "and 10 time RP gain again",
-        effectdisplay: value => `x${value.toString(0)} RP gain`,
+        effectdisplay: value => `x${format(value)} RP gain`,
         cost: DC.De275,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -532,23 +532,44 @@ const Reality = {
                 ch.style.backgroundColor = GlyphColor[glyph == undefined ? "undefined" : glyph.type];
                 ch.classList.add("glyph");
 
-                if(glyph != undefined) ch.onclick = () => {
-                    if(kd.SHIFT.isDown()) {
-                        mouse.classList.add("hidden");
-                        this.RemoveGlyph(player.glyphs.indexOf(glyph));
-                        this.RenderGlyphs();
-                    }
-                    else {
-                        glyph.activate();
-                        this.RenderGlyphs();
-                    }
-                }
+                if(!game.isMobile){
 
-                if(glyph != undefined) ch.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI([ Object.entries(GlyphType)[glyph.type][0]  + " glyph",
-                "level: " + glyph.level.toString(), "power: " + glyph.power.toString(), "effect: +" + GlyphEffects[Object.entries(GlyphType)[glyph.type][0]](glyph.level,glyph.power) + GlyphEffect[glyph.type] ], GlyphColor[glyph.type]);}
+                    if(glyph != undefined) ch.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI([ Object.entries(GlyphType)[glyph.type][0]  + " glyph",
+                        "level: " + format(glyph.level), "power: " + format(glyph.power), "effect: +" + format(GlyphEffects[Object.entries(GlyphType)[glyph.type][0]](glyph.level,glyph.power)) + GlyphEffect[glyph.type] ], GlyphColor[glyph.type]);
+                }
                 else ch.onmouseenter = undefined;
                 if(glyph != undefined) ch.onmouseleave = () => {mouse.classList.add("hidden");}
                 else ch.onmouseleave = undefined;
+                }
+
+
+                if(game.isMobile){
+                    if(glyph != undefined) ch.onclick = () => {
+                        modal.showchoose( [Object.entries(GlyphType)[glyph.type][0]  + " glyph",
+                        "level: " + format(glyph.level), "power: " + format(glyph.power),
+                        "effect: +" + format(GlyphEffects[Object.entries(GlyphType)[glyph.type][0]](glyph.level,glyph.power)) + GlyphEffect[glyph.type] ],
+                            [
+                                {text: "remove glyph", onclick: () => {this.RemoveGlyph(player.glyphs.indexOf(glyph)); this.RenderGlyphs(); modal.close();}},
+                                {text: "equip glyph", onclick: () => {glyph.activate(); this.RenderGlyphs(); modal.close();}}
+                            ]
+                        );
+                    }
+                }
+                else{
+
+                    if(glyph != undefined) ch.onclick = () => {
+                        if(kd.SHIFT.isDown()) {
+                            mouse.classList.add("hidden");
+                            this.RemoveGlyph(player.glyphs.indexOf(glyph));
+                            this.RenderGlyphs();
+                        }
+                        else {
+                            glyph.activate();
+                            this.RenderGlyphs();
+                        }
+                    }
+                }
+                
             }
 
             for (let a = 0; a < this.maxGlyphs; a++) {
@@ -557,18 +578,24 @@ const Reality = {
                 c.innerHTML = GlyphIcon[glyph == undefined ? "undefined" : glyph.type];
                 c.style.backgroundColor = GlyphColor[glyph == undefined ? "undefined" : glyph.type];
                 c.classList.add("glyph");
-                if(glyph != undefined) c.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI([ Object.entries(GlyphType)[glyph.type][0] + " glyph",
-                "level: " + glyph.level.toString(), "power: " + glyph.power.toString(), "effect: +" + GlyphEffects[Object.entries(GlyphType)[glyph.type][0]](glyph.level,glyph.power) + GlyphEffect[glyph.type] ], GlyphColor[glyph.type]);}
 
+                if(glyph != undefined) c.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI([ Object.entries(GlyphType)[glyph.type][0] + " glyph",
+                    "level: " + format(glyph.level), "power: " + format(glyph.power), "effect: +" + format(GlyphEffects[Object.entries(GlyphType)[glyph.type][0]](glyph.level,glyph.power)) + GlyphEffect[glyph.type] ], GlyphColor[glyph.type]);}
                 if(glyph != undefined) c.onmouseleave = () => {mouse.classList.add("hidden");}
+                    
             }
 
         }
 
         for(let z=0; this.maxGlyphs < activeglyphs.children.length; z++) activeglyphs.children[activeglyphs.children.length-1].remove();
-        glyphs.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
-        activeglyphs.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
-        glyphbuttons.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
+        if(game.isMobile){
+
+        }
+        else{
+            glyphs.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
+            activeglyphs.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
+            glyphbuttons.style.left = `calc(${(50 * (2-player.scroll.tab))}% - 10%)`;
+        }
         if(player.scroll.tab == 1) {glyphs.classList.remove("hidden"); activeglyphs.classList.remove("hidden"); glyphbuttons.classList.remove("hidden");}
         else {glyphs.classList.add("hidden"); activeglyphs.classList.add("hidden"); glyphbuttons.classList.add("hidden");}
     },
@@ -697,13 +724,13 @@ const GlyphColor = {
 }
 
 const GlyphEffects = {
-    Number: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Infinity: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Eternity: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Reality: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Immensity: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Power: (level, power) => level.root(2).mul(power.root(2)).log(10),
-    Level: (level, power) => level.root(2).mul(power.root(2)).log(10),
+    Number: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Infinity: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Eternity: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Reality: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Immensity: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Power: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
+    Level: (level, power) => level.sqrt(2).mul(power.sqrt(2)).log(10),
 }
 
 const TotalGlyphEffects = {

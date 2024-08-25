@@ -276,13 +276,13 @@ const catalogdata = [
             infinity, eternity, reality and immensity aren't fully automatic anymore,
             break IP,EP. universal upgrades affect the number multiplier.
             universal upgrades are automatically brought on Eternities, Realites and immensities.
-            fast scroll <hold space>, glyphs added to reality. instant start up. remove glyphs by [space+click]
+            fast scroll <hold space>, glyphs added to reality. instant start up. remove glyphs by <space+click>
             auto buy button (need auto buy upgrades to work)
-            volume [space to decease],
+            volume <space to decease>,
             a button to change the song.
-            a blackhole <span id='redact' class='redact'>that speeds up the game (best for auto production)</span>
-            immensity upgrades <span id='redact' class='redact'> need to be unlocked to buy them,
-            [hold space to see requirements] </span>
+            a blackhole that speeds up the game (best for auto production)
+            immensity upgrades need to be unlocked to buy them,
+            <hold space to see requirements>
             new songs!
             other small changes
 
@@ -296,7 +296,7 @@ const catalogdata = [
     {
         version: "V3.1.1",
         who: "glitchyfishys",
-        what: `added break infinity, it also fixed some bugs
+        what: `added break infinity, it also fixed dome bugs
             auto points gain is incresed by gamespeed
             left and right arrows move tabs, up and down open the uni upgrades
             fixed turbo mode breaking auto clicker`,
@@ -334,16 +334,6 @@ function loadcatalog(){
 
     catalog.innerHTML = catalog.innerHTML.replaceAll("glyphs", "<span id='redact' class='redact'>glyphs</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Glyphs", "<span id='redact' class='redact'>Glyphs</span>");
-    
-    catalog.innerHTML = catalog.innerHTML.replaceAll("eternities", "<span id='redact' class='redact'>eternities</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("Eternities", "<span id='redact' class='redact'>Eternities</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("realites", "<span id='redact' class='redact'>realites</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("Realites", "<span id='redact' class='redact'>Realites</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("immensities", "<span id='redact' class='redact'>immensities</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("Immensities", "<span id='redact' class='redact'>Immensities</span>");
-    
-    catalog.innerHTML = catalog.innerHTML.replaceAll("gamespeed", "<span id='redact' class='redact'>gamespeed</span>");
-    catalog.innerHTML = catalog.innerHTML.replaceAll("blackhole", "<span id='redact' class='redact'>blackhole</span>");
 
 
 }
