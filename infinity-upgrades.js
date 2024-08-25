@@ -5,7 +5,7 @@ const infinityupgadedata = [
         effect: () => {
             return DC.De7;
         },
-        decription: "number multiplier is change from x1e5 to x1e7",
+        decription: "number multiplier is change from x1e3 to x1e7",
         effectdisplay: value => "1e3 => " + format(value) + " number multiplier",
         cost: DC.D1,
         currencykey: "infinitypoints",
