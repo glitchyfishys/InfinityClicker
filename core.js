@@ -230,6 +230,14 @@ function maxupgrades(id = "infinity"){
 }
 
 function startup(){
+    if(game.isMobile){
+        document.styleSheets[0].disabled = true;
+        document.styleSheets[1].disabled = false;
+    }
+    else{
+        document.styleSheets[0].disabled = false;
+        document.styleSheets[1].disabled = true;
+    }
     if(game.isMobile) {
         modal.showtext("Mobile UI<br>sorry mobile is a WIP, help find bugs.<br>make an issue(s) on <a href='https://github.com/glitchyfishys/InfinityClicker/issues' target='_blanck'>github</a> and I'll try and fix it");
         gamemodel.style.zIndex = 5;
@@ -314,15 +322,6 @@ function UIupdate(){
     hoverUIupdatepos();
 
     FPS.innerHTML = game.isMobile ? "" : "fps: " + (6 / Deltatime).toFixed(2) + "<br>tps: " + (1 / Deltatime).toFixed(2);
-
-    if(game.isMobile){
-        document.styleSheets[0].disabled = true;
-        document.styleSheets[1].disabled = false;
-    }
-    else{
-        document.styleSheets[0].disabled = false;
-        document.styleSheets[1].disabled = true;
-    }
 
 }
 

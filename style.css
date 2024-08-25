@@ -162,6 +162,7 @@ body{
     color: white;
     text-align: center;
     overflow-x: hidden;
+    overflow-y: hidden;
     width: 100%;
     user-select: none;
 }
@@ -463,40 +464,6 @@ input[type="number"] {
     transition-duration: 1s;
 }
 
-.activeglyphsm{
-    position: fixed;
-    width: 100px;
-    height: 30px;
-    bottom: 110px;
-    transition-duration: 1s;
-    scrollbar-width: thin;
-    scrollbar-color: #00cc00 #005500;
-    z-index: 1;
-}
-
-.glyphsm{
-    position: fixed;
-    width: calc(100% - 150px);
-    height: 50px;
-    bottom: 15px;
-    overflow-y: scroll;
-    transition-duration: 1s;
-    scrollbar-width: thin;
-    scrollbar-color: #00cc00 #005500;
-    z-index: 1;
-}
-
-.glyphbuttonsm{
-    position: fixed;
-    display: flex;
-    width: 250px;
-    height: 20px;
-    bottom: 90px;
-    transition-duration: 1s;
-    z-index: 1;
-}
-
-
 .BHbuttons{
     position: absolute;
     width: 20%;
@@ -509,48 +476,6 @@ input[type="number"] {
     width: 225px;
     height: 40px;
     margin-bottom: 5px;
-}
-
-.BlackHole{
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    border: white solid 3px;
-    background-color: black;
-    width: 10px;
-    height: 10px;
-    position: fixed;
-    border-radius: 50%;
-    transition-duration: 1s;
-    z-index: -1;
-}
-
-
-.BHbuttonsm{
-    position: fixed;
-    width: calc(100% - 150px);
-    height: 180px;
-    top: 330px;
-    transition-duration: 1s;
-}
-
-.BHUGm{
-    width: 150px;
-    height: 60px;
-    margin-bottom: 5px;
-    left: 0px;
-}
-
-.BlackHolem{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    border: white solid 3px;
-    background-color: black;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transition-duration: 1s;
-    z-index: -1;
 }
 
 
