@@ -654,8 +654,3 @@ input[type="number"] {
     filter: hue-rotate(var(--immisinity-colour-shift));
     transition-duration: 1s;
 }
-
-.backm{
-    width: 100%;
-    height: 100%;
-}
