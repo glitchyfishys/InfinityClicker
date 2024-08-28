@@ -13,6 +13,7 @@
             <button style="width: 100px; height: 25px;" onclick="modal.showsettings()">settings</button>
             <button style="width: 100px; height: 25px;" onclick="modal.showinfo()">game info</button>
             <button style="width: 100px; height: 25px;" onclick="modal.showhotkeys()">hot keys</button>
+            <button style="width: 100px; height: 25px;" onclick="modal.showsave()">import/export</button>
         </div>
 
 
@@ -20,9 +21,9 @@
         <div id="glyphs" class="glyphs hidden"></div>
         <div id="glyphbuttons" class="glyphbuttons hidden">
             <button id="glyphrespec" style="width: 100px; height: 40px;" onclick="player.glyphrespec = !player.glyphrespec">respec glyphs next reality</button>
-            <button id="glyphsort" style="width: 50px; height: 40px; border-color: aqua;" onclick="Reality.sortglyphs()">sort glyphs</button>
+            <button id="glyphsort" style="width: 50px; height: 40px; border-color: aqua;" onclick="settings.confirm.glyphsort ? modal.showchoose(text = `sorting<br>sorting glyphs will only keep ${glyphkeepamount.valueAsNumber} of each type`, funct = [{text: 'sort glyphs', onclick: () => {Reality.sortglyphs(); modal.close()}}]) : Reality.sortglyphs()">sort glyphs</button>
             <div style="width: 15px;">
-                <input type="number" id="glyphkeepamount" min="0" max="72" style="width: 45px; height: 15px;">
+                <input type="number" id="glyphkeepamount" min="1" max="72" style="width: 45px; height: 15px;">
                 <select id="glyphselect" class="hidden" style="width: 50px; height: 18px;">
                     <option value="none">random</option>
                     <option value="Number">number</option>

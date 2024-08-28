@@ -25,7 +25,6 @@ class upgrade{
             this.reqirementtext = data.reqirementtext;
             this.HasMetUnlockRequirment = false;
         }
-        setInterval(() => this.tick(), 1000);
         this.tick();
     }
 
@@ -79,7 +78,7 @@ class upgrade{
     ugtext(){
         this.displayed();
         let text =  (typeof this.decription == "function") ? this.decription() : this.decription;
-        text +=  "<br>cost: " + format(this.cost) + " " + this.currencykey;
+        if(this.cost.neq(0) || (this.cost.eq(0) && !this.brought)) text +=  "<br>cost: " + (this.cost.neq(0) ? format(this.cost) + " " + this.currencykey : `free${!this.brought ? ", click to buy" : ""}${(this.reqirementtext != "" && !this.brought) ? " after being unlocked" : ""}`);
         if(!this.HasMetUnlockRequirment || (this.reqirementtext != "" && kd.SHIFT.isDown())) text += "<br>requirement: " + this.reqirementtext;
         if((this.brought && this.reqirementtext == "" ) || (this.brought && this.reqirementtext != "" && !kd.SHIFT.isDown())) text +=  "<br>effect: " + this.effectdisplay(this.effectordefault(1));
         

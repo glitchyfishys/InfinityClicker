@@ -5,51 +5,52 @@ const realityupgadedata = [
         effect: () => {
             return DC.D8;
         },
-        decription: "gain one eternity point every 60 seconds <br> also octuples EP gain <br> and autobuy infinity upgrades",
-        effectdisplay: value => "1/60 EP sec and x" + format(value) + " EP",
-        cost: DC.D1,
-        currencykey: "realitypoints",
-        mainele: "REA-UG",
-        reqirement: true,
-    },
-    {
-        id: 1,
-        effect: () => {
-            return DC.D1;
-        },
-        decription: "half the EP interval and keep the first eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep" + format(value) + " eternity upgrade",
-        cost: DC.D2,
+        decription: "gain one EP every 60 seconds, also 8x EP gain and autobuy infinity upgrades also keep EU 1",
+        effectdisplay: value => "1/60 EP sec and x" + format(value,0) + " EP and keep eternity upgrade 1",
+        cost: DC.DD1,
         currencykey: "realitypoints",
         mainele: "REA-UG",
         reqirement: true,
         onbuy: () => EternityUpgrades.filter(x => x.id < 1).forEach(x => {x.brought = true}),
     },
     {
-        id: 2,
+        id: 1,
         effect: () => {
-            return DC.D3;
+            return DC.D1;
         },
-        decription: "x2 auto EP and keep the 3 eternity upgrade",
-        effectdisplay: value => "2x auto EP and keep" + format(value) + " eternity upgrade",
-        cost: DC.D3,
+        decription: "half the EP interval and keep the first 3 eternity upgrade",
+        effectdisplay: value => "auto EP interval /2 and keep 3 eternity upgrades",
+        cost: DC.D2,
         currencykey: "realitypoints",
         mainele: "REA-UG",
         reqirement: true,
         onbuy: () => EternityUpgrades.filter(x => x.id < 3).forEach(x => {x.brought = true}),
     },
     {
+        id: 2,
+        effect: () => {
+            return DC.D2;
+        },
+        decription: "x2 auto EP and keep the 7 eternity upgrade",
+        effectdisplay: value => "2x auto EP and keep 7 eternity upgrade",
+        cost: new Decimal(2.5),
+        currencykey: "realitypoints",
+        mainele: "REA-UG",
+        reqirement: true,
+        onbuy: () => EternityUpgrades.filter(x => x.id < 7).forEach(x => {x.brought = true}),
+    },
+    {
         id: 3,
         effect: () => {
             return DC.D5;
         },
-        decription: "half the time and keep the 5 eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep" + format(value) + " eternity upgrade",
+        decription: "half the time and keep the 10 eternity upgrade",
+        effectdisplay: value => "auto EP interval /2 and keep 10 eternity upgrade",
         cost: DC.D5,
         currencykey: "realitypoints",
         mainele: "REA-UG",
         reqirement: true,
-        onbuy: () => EternityUpgrades.filter(x => x.id < 5).forEach(x => {x.brought = true}),
+        onbuy: () => EternityUpgrades.filter(x => x.id < 10).forEach(x => {x.brought = true}),
     },
     {
         id: 4,
@@ -66,10 +67,10 @@ const realityupgadedata = [
     {
         id: 5,
         effect: () => {
-            return DC.De3;
+            return DC.De4;
         },
-        decription: "start with 10000 IP and EP",
-        effectdisplay: value => `${format(value)} starting IP and EP`,
+        decription: "start with 10000 IP and EP on reality",
+        effectdisplay: value => `${format(value,0)} starting IP and EP`,
         cost: DC.D25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -94,7 +95,7 @@ const realityupgadedata = [
             return DC.D3;
         },
         decription: "break Infinity EP and auto EP is 3 times faster",
-        effectdisplay: value => `auto EP interval /${format(value)} and uncap EP`,
+        effectdisplay: value => `auto EP interval /${format(value,0)} and uncap EP`,
         cost: DC.D35,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -130,7 +131,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain two glyphs on reality instead of one",
-        effectdisplay: value => `+${format(value)} glyph on reality`,
+        effectdisplay: value => `+${format(value,0)} glyph on reality`,
         cost: DC.D500,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -142,7 +143,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "glyph level and power is better",
-        effectdisplay: value => `x${format(value)} glyph level and power`,
+        effectdisplay: value => `x${format(value,0)} glyph level and power`,
         cost: DC.De3,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -154,7 +155,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain an extra glyph on reality and one more glyph slot",
-        effectdisplay: value => `+${format(value)} glyph on reality and +1 glyph slot`,
+        effectdisplay: value => `+1 glyph on reality and +1 glyph slot`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -167,7 +168,7 @@ const realityupgadedata = [
             return DC.D25;
         },
         decription: "keep all eternity upgrades and Eternity time Upgrade start at 1 minute",
-        effectdisplay: value => `keeped ${format(value)} eternity upgrades`,
+        effectdisplay: value => `keeped ${format(value,0)} eternity upgrades`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -180,7 +181,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "auto EP is 10 times faster",
-        effectdisplay: value => `auto EP interval /${format(value)}`,
+        effectdisplay: value => `auto EP interval /${format(value,0)}`,
         cost: DC.De11,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -192,7 +193,7 @@ const realityupgadedata = [
             return DC.D1;
         },
         decription: "gain another glyph slot",
-        effectdisplay: value => `+${format(value)} glyph slot`,
+        effectdisplay: value => `+1 glyph slot`,
         cost: DC.De15,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -205,7 +206,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "faster auto IP and EP",
-        effectdisplay: value => `IP and EP interval /${format(value)}`,
+        effectdisplay: value => `IP and EP interval /${format(value,0)}`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -217,7 +218,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "glyph level and power is higher",
-        effectdisplay: value => `x${format(value)} glyph level and power`,
+        effectdisplay: value => `x${format(value,0)} glyph level and power`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -229,7 +230,7 @@ const realityupgadedata = [
             return DC.D3;
         },
         decription: "gain 3 more glyphs on reality",
-        effectdisplay: value => `+${format(value)} glyphs on reality`,
+        effectdisplay: value => `+3 glyphs on reality`,
         cost: DC.De25,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -253,7 +254,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "10 time RP gain",
-        effectdisplay: value => `x${format(value)} RP gain`,
+        effectdisplay: value => `x${format(value,0)} RP gain`,
         cost: DC.De28,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -265,7 +266,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "10 time RP gain again",
-        effectdisplay: value => `x${format(value)} RP gain`,
+        effectdisplay: value => `x${format(value,0)} RP gain`,
         cost: DC.De45,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -277,7 +278,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "and 10 time RP gain again",
-        effectdisplay: value => `x${format(value)} RP gain`,
+        effectdisplay: value => `x${format(value,0)} RP gain`,
         cost: DC.De65,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -289,7 +290,7 @@ const realityupgadedata = [
             return DC.D10;
         },
         decription: "stronger glyphs",
-        effectdisplay: value => `x${format(value)} glyph level and power`,
+        effectdisplay: value => `x${format(value,0)} glyph level and power`,
         cost: DC.De80,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -301,7 +302,7 @@ const realityupgadedata = [
             return DC.D25;
         },
         decription: "even stronger glyphs",
-        effectdisplay: value => `x${format(value)} glyph level and power`,
+        effectdisplay: value => `x${format(value,0)} glyph level and power`,
         cost: DC.De105,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -313,7 +314,7 @@ const realityupgadedata = [
             return DC.D2;
         },
         decription: "RP gain is squared",
-        effectdisplay: value => `^${format(value)} RP`,
+        effectdisplay: value => `^${format(value,0)} RP`,
         cost: DC.De140,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -324,8 +325,8 @@ const realityupgadedata = [
         effect: () => {
             return DC.D10;
         },
-        decription: "and 10 time RP gain again",
-        effectdisplay: value => `x${format(value)} RP gain`,
+        decription: "and 10 times RP gain again",
+        effectdisplay: value => `x${format(value,0)} RP gain`,
         cost: DC.De275,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -366,10 +367,10 @@ const Reality = {
         
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).div(10).max(1));
 
-        if(!this.broken) return gain;
-        const prestage = Currency.EP.div(this.EPreq).log(10);
-        
         gain = gain.pow(TotalGlyphEffects.Reality());
+        if(!this.broken) return gain.mul(Universal.gainedbonus);
+        
+        const prestage = Currency.EP.div(this.EPreq).log(10);
         return gain.mul(prestage).mul(Universal.gainedbonus).min(this.limit);
     },
 
@@ -394,8 +395,12 @@ const Reality = {
 
     reset(){
         if(!this.canreality) return false;
+        if(Currency.REAs.eq(0) && game.progress == 3) {
+            player.scroll.tab = 1;
+            tabchange();
+        }
         Currency.RP = Currency.RP.add(this.gainedrealitypoints).min(this.limit);
-        if(Time.thiseternity.lte(3600) && Currency.REAs.eq(0)) ImmensityUpgrades[4].HasMetUnlockRequirment = true;
+        if(Time.thisreality.lte(3600) && Currency.REAs.eq(0)) ImmensityUpgrades[4].HasMetUnlockRequirment = true;
 
         for(let a=0; a < this.gainedglyphs; a++){
             if(player.glyphs.length < 72) player.glyphs.push(this.giveGlyph());
@@ -418,7 +423,8 @@ const Reality = {
 
         if(player.glyphrespec) this.UnequipAll();
         this.RenderGlyphs();
-        if(Currency.IMMs.gt(0)) ImmensityUpgrades[1].HasMetUnlockRequirment = true;
+        if(Currency.IMMs.neq(0)) ImmensityUpgrades[1].HasMetUnlockRequirment = true;
+        ImmensityUpgrades[6].tick();
     },
 
     giveGlyph(){
@@ -482,7 +488,7 @@ const Reality = {
         player.glyphs = filt.flat();
         
 
-        if(glyphkeepamount.validity.valid){
+        if(glyphkeepamount.validity.valid && !Number.isNaN(glyphkeepamount.valueAsNumber)){
             const list = [];
             const v = glyphkeepamount.valueAsNumber;
 
@@ -503,7 +509,7 @@ const Reality = {
             player.glyphs = list.flat();
 
         }else{
-            notify("amount of glyphs to keep is out of range try 0 - 72", 6, "red");
+            notify("amount of glyphs to keep is out of range or NaN, try 1 - 72", 6, "red");
         }
         
 

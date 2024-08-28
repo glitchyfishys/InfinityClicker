@@ -520,6 +520,7 @@ input[type="number"] {
     min-width: 150px;
     min-height: 50px;
     max-height: 50%;
+    overflow-y: auto;
     
     z-index: 5;
     left: 50%;

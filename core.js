@@ -58,6 +58,13 @@ var settings = {
         eternity: true,
         reality: true,
         immensity: true,
+        glyphsort: true,
+    },
+    auto:{
+        infinity: false,
+        eternity: false,
+        reality: false,
+        immensity: false,
     },
 }
 
@@ -79,7 +86,7 @@ function scrollup(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.infinity -= 5 * shift;
+        player.scroll.infinity = document.getElementById("INF-UG").scrollTop - (5 * shift);
         player.scroll.infinity = Math.clamp(player.scroll.infinity, 0, document.getElementById("INF-UG").scrollHeight - 450);
         l++;
         document.getElementById("INF-UG").scrollTo(0, player.scroll.infinity);
@@ -90,7 +97,7 @@ function scrollup(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.eternity -= 5 * shift;
+        player.scroll.eternity = document.getElementById("ETR-UG").scrollTop - (5 * shift);
         player.scroll.eternity = Math.clamp(player.scroll.eternity, 0, document.getElementById("ETR-UG").scrollHeight - 450);
         l++;
         document.getElementById("ETR-UG").scrollTo(0, player.scroll.eternity);
@@ -101,7 +108,7 @@ function scrollup(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.reality -= 5 * shift;
+        player.scroll.reality = document.getElementById("REA-UG").scrollTop - (5 * shift);
         player.scroll.reality = Math.clamp(player.scroll.reality, 0, document.getElementById("REA-UG").scrollHeight - 450);
         l++;
         document.getElementById("REA-UG").scrollTo(0, player.scroll.reality);
@@ -112,7 +119,7 @@ function scrollup(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.immensity -= 5 * shift;
+        player.scroll.immensity = document.getElementById("IMM-UG").scrollTop - (5 * shift);
         player.scroll.immensity = Math.clamp(player.scroll.immensity, 0, document.getElementById("IMM-UG").scrollHeight - 450);
         l++;
         document.getElementById("IMM-UG").scrollTo(0, player.scroll.immensity);
@@ -123,7 +130,7 @@ function scrollup(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.universal -= 5 * shift;
+        player.scroll.universal = document.getElementById("UNI-UG").scrollTop - (5 * shift);
         player.scroll.universal = Math.clamp(player.scroll.universal, 0, document.getElementById("UNI-UG").scrollHeight - 100);
         l++;
         document.getElementById("UNI-UG").scrollTo(0, player.scroll.universal);
@@ -138,7 +145,7 @@ function scrolldown(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.infinity += 5 * shift;
+            player.scroll.infinity = document.getElementById("INF-UG").scrollTop + (5 * shift);
         player.scroll.infinity = Math.clamp(player.scroll.infinity, 0, document.getElementById("INF-UG").scrollHeight - 450);
         l++;
         document.getElementById("INF-UG").scrollTo(0, player.scroll.infinity);
@@ -149,7 +156,7 @@ function scrolldown(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.eternity += 5 * shift;
+        player.scroll.eternity = document.getElementById("ETR-UG").scrollTop + (5 * shift);
         player.scroll.eternity = Math.clamp(player.scroll.eternity, 0, document.getElementById("ETR-UG").scrollHeight - 450);
         l++;
         document.getElementById("ETR-UG").scrollTo(0, player.scroll.eternity);
@@ -160,7 +167,7 @@ function scrolldown(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.reality += 5 * shift;
+        player.scroll.reality = document.getElementById("REA-UG").scrollTop + (5 * shift);
         player.scroll.reality = Math.clamp(player.scroll.reality, 0, document.getElementById("REA-UG").scrollHeight - 450);
         l++;
         document.getElementById("REA-UG").scrollTo(0, player.scroll.reality);
@@ -171,7 +178,7 @@ function scrolldown(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.immensity += 5 * shift;
+        player.scroll.immensity = document.getElementById("IMM-UG").scrollTop + (5 * shift);
         player.scroll.immensity = Math.clamp(player.scroll.immensity, 0, document.getElementById("IMM-UG").scrollHeight - 450);
         l++;
         document.getElementById("IMM-UG").scrollTo(0, player.scroll.immensity);
@@ -182,7 +189,7 @@ function scrolldown(id = "infinity"){
 
         let l = 0;
         const i = setInterval(() => {
-        player.scroll.universal += 5 * shift;
+        player.scroll.universal = document.getElementById("UNI-UG").scrollTop + (5 * shift);
         player.scroll.universal = Math.clamp(player.scroll.universal, 0, document.getElementById("UNI-UG").scrollHeight - 100);
         l++;
         document.getElementById("UNI-UG").scrollTo(0, player.scroll.universal);
@@ -222,11 +229,11 @@ function toggleuni(t=true){
 }
 
 function maxupgrades(id = "infinity"){
-    if(id == "infinity") InfinityUpgrades.forEach(x => x.buy());
-    else if(id == "eternity") EternityUpgrades.forEach(x => x.buy());
-    else if(id == "reality") RealityUpgrades.forEach(x => x.buy());
-    else if(id == "immensity"){}
-    else if(id == "uni") UniversalUpgrades.forEach(x => x.buy());
+    if(id == "infinity" && game.progress > 1) InfinityUpgrades.forEach(x => x.buy());
+    else if(id == "eternity" && game.progress > 2) EternityUpgrades.forEach(x => x.buy());
+    else if(id == "reality" && game.progress > 3) RealityUpgrades.forEach(x => x.buy());
+    else if(id == "immensity" && game.progress > 4){}
+    else if(id == "uni" && game.progress > 1) UniversalUpgrades.forEach(x => x.buy());
 }
 
 function startup(){
@@ -321,12 +328,35 @@ function UIupdate(){
 
     FPS.innerHTML = game.isMobile ? "" : "fps: " + (6 / Deltatime).toFixed(2) + "<br>tps: " + (1 / Deltatime).toFixed(2);
 
+    if(game.isMobile){
+        if(player.scroll.tab == -1) InfinityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 0) EternityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 1) RealityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 2) ImmensityUpgrades.forEach(x => x.tick());     
+    }
+    else{
+        if(player.scroll.tab == -1) InfinityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 0) InfinityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 0) EternityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 1) EternityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 1) RealityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 2) RealityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 2) ImmensityUpgrades.forEach(x => x.tick());
+        if(player.scroll.tab == 3) ImmensityUpgrades.forEach(x => x.tick());
+    }
+
+    if(player.uniopen) UniversalUpgrades.forEach(x => x.tick());
 }
 
 function autotick(){
     infinity.persecond();
     Eternity.persecond();
     Reality.persecond();
+    
+    if(settings.auto.infinity) infinity.reset();
+    if(settings.auto.eternity) Eternity.reset();
+    if(settings.auto.reality) Reality.reset();
+    if(settings.auto.immensity) Immensity.reset();
 
     if(player.auto){
         if(RealityUpgrades[0].brought) InfinityUpgrades.forEach(u => u.buy());
@@ -337,16 +367,15 @@ function autotick(){
 
     if(ImmensityUpgrades[5].brought) {
         autospeed = new Decimal(1500);
-        autospeed = autospeed.mul(game.speed);
     }else{
         if(InfinityUpgrades[2].brought) autospeed = autospeed.mul(2);
         if(InfinityUpgrades[3].brought) autospeed = autospeed.mul(5);
         if(InfinityUpgrades[17]) autospeed = autospeed.mul(3);
         if(EternityUpgrades[14].brought) autospeed = autospeed.mul(10);
-        autospeed = autospeed.mul(game.speed);
     }
+    autospeed = autospeed.mul(game.speed);
     
-    Currency.number = Currency.number.mul(nummul().pow(autospeed.mul(Deltatime / 10)));
+    Currency.number = Currency.number.mul(nummul().pow(autospeed.mul(Deltatime / 4)));
 }
 
 
@@ -361,6 +390,12 @@ function savegame(){
     for(let i=0; i < EternityUpgrades.length; i++) player.eternityupgrades[i] = EternityUpgrades[i].brought;
     for(let i=0; i < UniversalUpgrades.length; i++) player.universalupgrades[i] = UniversalUpgrades[i].brought;
 
+    player.scroll.infinity = document.getElementById("INF-UG").scrollTop;
+    player.scroll.eternity = document.getElementById("ETR-UG").scrollTop;
+    player.scroll.reality = document.getElementById("REA-UG").scrollTop;
+    player.scroll.immensity = document.getElementById("IMM-UG").scrollTop;
+    player.scroll.universal = document.getElementById("UNI-UG").scrollTop;
+
     player.Blackhole = BlackHoles;
     player.lastonlinetick = Date.now();
 
@@ -373,11 +408,15 @@ function savegame(){
     notify("game saved", 3, "#00aaff")
 }
 
-function loadgame(){
+function loadgame(sav, set){
+    
     if(localStorage.InfinityClickerSave == undefined) return;
-    let sav = JSON.parse(localStorage.InfinityClickerSave);
+    if(sav == undefined) sav = JSON.parse(localStorage.InfinityClickerSave);
     if(sav == undefined) return;
 
+    try {
+        
+    
     if(sav.universalupgrades != undefined) for(let i=0; i < sav.universalupgrades.length; i++) UniversalUpgrades[i].brought = sav.universalupgrades[i];
     if(sav.infinityupgrades != undefined) for(let i=0; i < sav.infinityupgrades.length; i++) InfinityUpgrades[i].brought = sav.infinityupgrades[i];
     if(sav.eternityupgrades != undefined) for(let i=0; i < sav.eternityupgrades.length; i++) EternityUpgrades[i].brought = sav.eternityupgrades[i];
@@ -386,20 +425,28 @@ function loadgame(){
         ImmensityUpgrades[i].brought = sav.immensityupgrades[i];
         ImmensityUpgrades[i].HasMetUnlockRequirment = sav.immensityupgradereqirements[i];
     }
-    if(sav.money.highestnumber != undefined) player.money.highestnumber = sav.money.highestnumber;
+    if(sav.money != undefined){
+        if(sav.money.highestnumber != undefined) player.money.highestnumber = sav.money.highestnumber;
+        const mkeys = Object.keys(sav.money);
+        mkeys.forEach(key => player.money[key] = new Decimal(sav.money[key]));
+    }
+
     if(sav.glyphs != undefined) sav.glyphs.forEach(x => player.glyphs.push(new Glyph(x)));
 
-    const mkeys = Object.keys(player.money);
-    mkeys.forEach(key => player.money[key] = new Decimal(sav.money[key]));
+    if(sav.reset != undefined){
+        const rkeys = Object.keys(sav.reset);
+        rkeys.forEach(key => player.reset[key] = new Decimal(sav.reset[key]));
+    }
 
-    const rkeys = Object.keys(player.reset);
-    rkeys.forEach(key => player.reset[key] = new Decimal(sav.reset[key]));
+    if(sav.time != undefined){
+        const tkeys = Object.keys(sav.time);
+        tkeys.forEach(k => player.time[k] = new Decimal(sav.time[k]));
+    }
 
-    const tkeys = Object.keys(sav.time);
-    tkeys.forEach(k => player.time[k] = new Decimal(sav.time[k]));
-
-    const skeys = Object.keys(sav.scroll);
-    skeys.forEach(k => player.scroll[k] = sav.scroll[k]);
+    if(sav.scroll != undefined){
+        const skeys = Object.keys(sav.scroll);
+        skeys.forEach(k => player.scroll[k] = sav.scroll[k]);
+    }
 
     if(sav.uniopen != undefined) player.uniopen = sav.uniopen;
     if(sav.auto != undefined) player.auto = sav.auto;
@@ -420,21 +467,36 @@ function loadgame(){
 
     if(sav.Blackhole != undefined) for(let i=0; i < sav.Blackhole.length; i++) BlackHoles[i] = new BlackHole(sav.Blackhole[i]);
 
-    let set = JSON.parse(localStorage.InfinityClickerSettings == undefined ? "{}" : localStorage.InfinityClickerSettings);
+    if(set == undefined) set = JSON.parse(localStorage.InfinityClickerSettings == undefined ? "{}" : localStorage.InfinityClickerSettings);
 
-    const skey = Object.keys(set);
-    skey.forEach(k => settings[k] = set[k]);
+    if(set != undefined){
+        const skey = Object.keys(set);
+        skey.forEach(k => settings[k] = set[k]);
 
-    glyphselect.value = settings.glyphselect;
-    glyphkeepamount.value = settings.glyphkeepamount;
-    const ck = Object.keys(set.confirm);
-    ck.forEach(x => settings.confirm[x] = set.confirm[x]);
+        glyphselect.value = settings.glyphselect;
+        glyphkeepamount.value = settings.glyphkeepamount;
+        if(set.confirm != undefined){
+            const ck = Object.keys(set.confirm);
+            ck.forEach(x => settings.confirm[x] = set.confirm[x]);
+        }
+        if(set.auto != undefined){
+            const ck = Object.keys(set.auto);
+            ck.forEach(x => settings.auto[x] = set.auto[x]);
+        }
+    }
 
     if(ImmensityUpgrades[6].brought) glyphselect.classList.remove("hidden");
+
+    if(sav.lastonlinetick != undefined){
+        const ticklength = (Date.now() - sav.lastonlinetick) / 1000;
+        for(let t=0; t < 1000; t++) gameloop(ticklength / 1000);
+        notify(ticklength + " seconds of offline time used over 1000 ticks", 4, "lightgreen");
+    }
+
+    } catch (error) {
+        notify(error, 25, "red");
+    }
     
-    const ticklength = (Date.now() - sav.lastonlinetick) / 1000;
-    for(let t=0; t < 1000; t++) gameloop(ticklength / 1000);
-    notify(ticklength + " seconds of offline time used over 1000 ticks", 4, "lightgreen")
 }
 
 
@@ -535,19 +597,19 @@ kd.L.down( evt => {
 });
 
 kd.I.down( evt => {
-    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) settings.confirm.infinity ? modal.showreset('infinity') : infinity.reset();
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey && infinity.caninfinity) settings.confirm.infinity ? modal.showreset('infinity') : infinity.reset();
 });
 
 kd.E.down( evt => {
-    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) settings.confirm.eternity ? modal.showreset('Eternity') : Eternity.reset();
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey && Eternity.caneternity) settings.confirm.eternity ? modal.showreset('Eternity') : Eternity.reset();
 });
 
-kd.R.down( evt => {
-    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) settings.confirm.reality ? modal.showreset('Reality') : Reality.reset();
+kd.Y.down( evt => {
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey && Reality.canreality) settings.confirm.reality ? modal.showreset('Reality') : Reality.reset();
 });
 
 kd.N.down( evt => {
-    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) settings.confirm.immensity ? modal.showreset('Immensity') : Immensity.reset();
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey && Immensity.canimmensity) settings.confirm.immensity ? modal.showreset('Immensity') : Immensity.reset();
 });
 
 kd.A.press( evt => {
@@ -566,6 +628,21 @@ kd.RIGHT.press( evt => {
     if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) tab(false);
 });
 
+kd.UP.press( evt => {
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) {
+        player.uniopen = true;
+        document.getElementById("UNI-UG").classList.remove("hidden");
+        evt.preventDefault();
+    }
+});
+
+kd.DOWN.press( evt => {
+    if(!evt.altKey && !evt.shiftKey && !evt.ctrlKey) {
+        player.uniopen = false;
+        document.getElementById("UNI-UG").classList.add("hidden");
+        evt.preventDefault();
+    }
+});
 
 function addnewupgrade(mainname = "INF-UG"){
     let ele = document.getElementById(mainname);
@@ -573,7 +650,6 @@ function addnewupgrade(mainname = "INF-UG"){
     child.classList.add("upgrade");
     return child;
 }
-
 
 const Currency = {
     get number(){
@@ -713,7 +789,15 @@ const Time = {
         if(time.gte(3600)) return format(Decimal.div(time, this.timechanges.hours)) + this.times.hours;
         if(time.gte(60)) return format(Decimal.div(time, this.timechanges.minutes)) + this.times.minutes;
         if(time.gte(1)) return format(Decimal.div(time, this.timechanges.seconds)) + this.times.seconds;
-        
+    },
+
+    formatshort(time = DC.D1){
+        if(time.lt(1)) return format(Decimal.div(time, this.timechanges.milliseconds)) + this.times.shortmilliseconds;
+        if(time.gte(3600 * 24 * 365)) return format(Decimal.div(time, this.timechanges.years)) + this.times.shortyears;
+        if(time.gte(3600 * 24)) return format(Decimal.div(time, this.timechanges.days)) + this.times.shortdays;
+        if(time.gte(3600)) return format(Decimal.div(time, this.timechanges.hours)) + this.times.shorthours;
+        if(time.gte(60)) return format(Decimal.div(time, this.timechanges.minutes)) + this.times.shortminutes;
+        if(time.gte(1)) return format(Decimal.div(time, this.timechanges.seconds)) + this.times.shortseconds;
     },
 
     times: {
@@ -724,7 +808,7 @@ const Time = {
         minutes: " minutes",
         shortminutes: " mins",
         hours: " hours",
-        shortshours: " hrs",
+        shorthours: " hrs",
         days: " days",
         shortdays: " dys",
         years: " years",
@@ -742,12 +826,34 @@ const Time = {
     },
 }
 
-function format(num = DC.D0){
-    return isNaN(num.layer) || isNaN(num.sign) || isNaN(num.mag) ? "NaN" : num.mag === Number.POSITIVE_INFINITY || num.layer === Number.POSITIVE_INFINITY ? 1 === num.sign ? "Infinity" : "-Infinity" : 0 === num.layer ? num.mag < 1e5 && num.mag > 1e-5 || 0 === num.mag ? (num.sign * num.mag).toFixed(2).toString() : num.m.toFixed(2) + "e" + shortnum(num.e,0) : 1 === num.layer ? num.m.toFixed(2) + "e" + (num.e > 1e5 ? shortnum(num.e) : shortnum(num.e,0)) : num.layer <= 5 ? (-1 === num.sign ? "-" : "") + "e".repeat(num.layer) + shortnum(num.mag) : (-1 === num.sign ? "-" : "") + "(e^" + num.layer + ")" + shortnum(num.mag);
+function format(num = DC.D0, pls = 2){
+    return isNaN(num.layer) || isNaN(num.sign) || isNaN(num.mag) ? "NaN" : num.mag === Number.POSITIVE_INFINITY || num.layer === Number.POSITIVE_INFINITY ? 1 === num.sign ? "Infinity" : "-Infinity" : 0 === num.layer ? num.mag < 1e5 && num.mag > 1e-5 || 0 === num.mag ? (num.sign * num.mag).toFixed(pls).toString() : num.m.toFixed(pls) + "e" + shortnum(num.e,0) : 1 === num.layer ? num.m.toFixed(1) + "e" + (num.e > 1e5 ? shortnum(num.e,1) : shortnum(num.e,0)) : num.layer <= 5 ? (-1 === num.sign ? "-" : "") + "e".repeat(num.layer) + shortnum(num.mag) : (-1 === num.sign ? "-" : "") + "(e^" + shortnum(num.layer) + ")" + shortnum(num.mag);
 }
 
 function shortnum(num = 0,pls = 2){
     if(num < 1e5) return num.toFixed(pls);
     let l = Math.log10(num);
-    return (num / 10 ** l).toFixed(pls) + "e" + Math.floor(l);
+    return (num / 10 ** Math.floor(l)).toFixed(pls) + "e" + Math.floor(l);
+}
+
+function expo(){
+    navigator.clipboard.writeText(btoa(JSON.stringify(player)) + "settings split" + btoa(JSON.stringify(settings)));
+    notify("copyed save", 5, "lightblue");
+}
+
+function impo(){
+    const s = importer.value.split("settings split");
+    console.log(s)
+    try {
+        atob(s[0])
+    } catch (error) {
+        notify("failed to Decode save", 25, "red");
+    }
+    try {
+        atob(s[1])
+    } catch (error) {
+        notify("failed to Decode settings", 25, "red");        
+    }
+    loadgame(atob(s[0]), atob(s[1]));
+    notify("save imported", 5, "lime")
 }

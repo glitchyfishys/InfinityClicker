@@ -24,7 +24,8 @@
     position: absolute;
     visibility: hidden;
     opacity: 0;
-    left: 0;
+    height: 0px;
+    width: 0px;
 }
 
 .redact{
@@ -115,10 +116,12 @@ text{
 .upgrade{
     margin-bottom: 15px;
     width: 240px;
+    height: 77px;
     font-size: 12px;
     transition-duration: 0.5s;
     display: inline-grid;
-    overflow-y: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .srcoll{
@@ -478,6 +481,19 @@ input[type="number"] {
     margin-bottom: 5px;
 }
 
+.BlackHole{
+    position: fixed;
+    top: 50%;
+    left: 160px;
+    transform: translateY(-50%) translateX(-50%);
+    border: white solid 3px;
+    background-color: black;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition-duration: 1s;
+    z-index: -1;
+}
 
 .closemodalbutton{
     width: 25px;
@@ -506,7 +522,9 @@ input[type="number"] {
     min-width: 150px;
     min-height: 50px;
     max-height: 100%;
-    
+    max-height: 50%;
+    overflow-y: auto;
+
     z-index: 5;
     left: 50%;
     top: 50%;

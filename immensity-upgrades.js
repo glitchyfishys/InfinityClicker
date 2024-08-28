@@ -7,7 +7,7 @@ const immensityupgadedata = [
         },
         decription: "gain one reality point every 25 minutes <br> also 25x RP gain",
         effectdisplay: value => "1/1500 RP sec and x" + format(value,1) + " RP",
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -21,7 +21,7 @@ const immensityupgadedata = [
         },
         decription: "the first upgrade is faster (1 minute)",
         effectdisplay: value => "1/60 RP sec",
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -35,7 +35,7 @@ const immensityupgadedata = [
         },
         decription: "immensity is done at 1e200 RP",
         effectdisplay: value => "1.8e108 lower RP requirement",
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -49,7 +49,7 @@ const immensityupgadedata = [
         },
         decription: "the first upgrade is faster (10 seconds)",
         effectdisplay: value => "1/10 RP sec",
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -63,7 +63,7 @@ const immensityupgadedata = [
         },
         decription: "IP EP RP and IM gain are multiplied by total time played",
         effectdisplay: value => `x${format(value,1)} IP,EP,<br>x${format(value.div(10),1)} RP and x${format(value.pow(0.2),1)} IM`,
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -77,7 +77,7 @@ const immensityupgadedata = [
         },
         decription: "keep auto clicker speed an stays unlocked",
         effectdisplay: value => `max auto clicker speed and stays unlocked`,
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -91,13 +91,14 @@ const immensityupgadedata = [
         },
         decription: "pick one glyph type, get 6 on reality and improve level and power gain",
         effectdisplay: value => `pick one glyph type, 6 glyphs on reality, x25 level and power`,
-        cost: DC.D1,
+        cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
         unlock: () => {
+            if(Currency.IMMs.eq(0)) return false;
             let yes = false;
-            player.glyphs.forEach(x => GlyphEffects[Object.entries(GlyphType)[x.type][0]](x.level,x.power).gte(6) ? yes = true : yes = false);
+            player.glyphs.forEach(x => GlyphEffects[Object.entries(GlyphType)[x.type][0]](x.level,x.power).gte(6) ? yes = true : false);
             return yes;
         }, 
         reqirementtext: "have a glyphs effect over 6",
@@ -184,6 +185,10 @@ const Immensity = {
 
     reset(){
         if(!this.canimmensity) return false;
+        if(Currency.IMMs.eq(0) && game.progress == 4) {
+            player.scroll.tab = 2;
+            tabchange();
+        }
         Currency.IM = Currency.IM.add(this.gainedimmensitypoints).min(this.limit);
         Currency.IMMs = Currency.IMMs.add(this.gainedimmensitys);
 
@@ -223,12 +228,9 @@ const Immensity = {
             BHinfo.style.width = "150px";
             BHinfo.style.marginLeft = "20px";
             BHinfo.style.fontSize = "12px";
-
         }
-        else{
-            BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 112.5px)`;
-            Blackhole.style.left = `calc(${(50 * (3-player.scroll.tab))}%)`;
-        }
+        Blackhole.style.left = `calc(${(50 * (3-player.scroll.tab))}%)`;
+        BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 112.5px)`;
 
         if(player.scroll.tab == 2) {BHbuttons.classList.remove("hidden");}
         else {BHbuttons.classList.add("hidden");}
@@ -250,8 +252,8 @@ const Immensity = {
             BH1.classList.remove("hidden");
             BH3.classList.remove("hidden");
             BlackHoles[0].isactive ? 
-            BHinfo.innerHTML = `the black hole is active for ${BlackHoles[0].activetime.toFixed(2).toString()} seconds<br> mulipling game speed by ${BlackHoles[0].power.toString(2)}`
-            : BHinfo.innerHTML = `the black hole will activate in ${(BlackHoles[0].interval - BlackHoles[0].timer).toFixed(2).toString()} seconds <br> while active mulipliys game speed by ${BlackHoles[0].power.toString(2)}`
+            BHinfo.innerHTML = `the black hole is active for ${BlackHoles[0].activetime.toFixed(2).toString()} seconds<br> mulipling game speed by ${format(BlackHoles[0].power)}`
+            : BHinfo.innerHTML = `the black hole will activate in ${(BlackHoles[0].interval - BlackHoles[0].timer).toFixed(2).toString()} seconds <br> while active, mulipliys game speed by ${format(BlackHoles[0].power)}`
         }
         
     }

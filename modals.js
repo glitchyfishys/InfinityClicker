@@ -28,6 +28,44 @@ const modal ={
         this.openid = 1;
     },
 
+    showsave(text = "import/export <br> importing can cause issues<br> if there is an error refresh before autosave happens") {
+        gamemodel.innerHTML = "";
+        
+        let displaytext = "";
+        Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
+        
+        gamemodel.innerHTML += displaytext;
+        
+        const cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "X";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => this.close();
+
+        gamemodel.appendChild(document.createElement("br"));
+        let bu = gamemodel.appendChild(document.createElement("button"));
+        bu.onclick = () => expo();
+        bu.innerHTML = "export save";
+        bu.style.width = "100px";
+        bu.style.height = "20px"
+        gamemodel.appendChild(document.createElement("br"));
+
+        bu = gamemodel.appendChild(document.createElement("input"));
+        bu.id = "importer";
+        bu.value = "save";
+        bu.style.width = "200px";
+        bu.style.height = "20px"
+        gamemodel.appendChild(document.createElement("br"));
+
+        bu = gamemodel.appendChild(document.createElement("button"));
+        bu.onclick = () => {impo(); modal.close();};
+        bu.innerHTML = "import save";
+        bu.style.width = "100px";
+        bu.style.height = "20px";
+
+        modal.show();
+        this.openid = 1;
+    },
+
     showchoose(text = "hello", funct = [{text: "hi", onclick: () => "foot"}]) {
         gamemodel.innerHTML = "";
         
@@ -90,14 +128,22 @@ const modal ={
         cl.classList.add("closemodalbutton");
         cl.onclick = () => modal.close();
         
+        let al;
 
         if(game.progress > 1){
-            let al = gamemodel.appendChild(document.createElement("span"));
+            al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "confirm infinity";
             al = gamemodel.appendChild(document.createElement("input"));
             al.type = "checkbox";
             al.onclick = () => {settings.confirm.infinity = !settings.confirm.infinity};
             al.checked = settings.confirm.infinity;
+
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "auto infinity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.auto.infinity = !settings.auto.infinity};
+            al.checked = settings.auto.infinity;
         }
 
         if(game.progress > 2){
@@ -110,11 +156,17 @@ const modal ={
             al.type = "checkbox";
             al.onclick = () => {settings.confirm.eternity = !settings.confirm.eternity};
             al.checked = settings.confirm.eternity;
+
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "auto infinity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.auto.eternity = !settings.auto.eternity};
+            al.checked = settings.auto.eternity;
         }
 
         if(game.progress > 3){
-            al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = "<br>";
+            gamemodel.appendChild(document.createElement("br"));
             
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "confirm reality";
@@ -122,9 +174,24 @@ const modal ={
             al.type = "checkbox";
             al.onclick = () => {settings.confirm.reality = !settings.confirm.reality;};
             al.checked = settings.confirm.reality;
-            
+
+            gamemodel.appendChild(document.createElement("br"));
+
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = "<br>";
+            al.innerHTML = "confirm glyph sorting";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.confirm.glyphsort = !settings.confirm.glyphsort;};
+            al.checked = settings.confirm.glyphsort;
+            
+            gamemodel.appendChild(document.createElement("br"));
+
+            al = gamemodel.appendChild(document.createElement("span"));
+            al.innerHTML = "auto infinity";
+            al = gamemodel.appendChild(document.createElement("input"));
+            al.type = "checkbox";
+            al.onclick = () => {settings.auto.reality = !settings.auto.reality};
+            al.checked = settings.auto.reality;
         }
 
         if(game.progress > 4){

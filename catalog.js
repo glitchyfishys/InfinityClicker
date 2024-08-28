@@ -334,11 +334,9 @@ function loadcatalog(){
 
     catalog.innerHTML = catalog.innerHTML.replaceAll("glyphs", "<span id='redact' class='redact'>glyphs</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Glyphs", "<span id='redact' class='redact'>Glyphs</span>");
-    
+
     catalog.innerHTML = catalog.innerHTML.replaceAll("gamespeed", "<span id='redact' class='redact'>gamespeed</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("blackhole", "<span id='redact' class='redact'>blackhole</span>");
-
-
 }
 
 function addtocatalog(data){

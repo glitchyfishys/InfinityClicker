@@ -5,7 +5,7 @@ const infinityupgadedata = [
         effect: () => {
             return DC.De7;
         },
-        decription: "number multiplier is change from x1e3 to x1e7",
+        decription: "number multiplier is changed from x1e3 to x1e7",
         effectdisplay: value => "1e3 => " + format(value) + " number multiplier",
         cost: DC.D1,
         currencykey: "infinitypoints",
@@ -53,8 +53,8 @@ const infinityupgadedata = [
         effect: () => {
             return DC.De15;
         },
-        decription: "number multiplier is now x1e15",
-        effectdisplay: value => "1e7 =>" + format(value) + " number multiplier",
+        decription: "number multiplier is now 1e15",
+        effectdisplay: value => `${format(InfinityUpgrades[0].effect())} => ${format(value)} number multiplier`,
         cost: DC.D15,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -66,7 +66,7 @@ const infinityupgadedata = [
             return DC.De30;
         },
         decription: "number multiplier is now x1e30",
-        effectdisplay: value => "1e15 => " + format(value) + " number multiplier",
+        effectdisplay: value => `${format(InfinityUpgrades[4].effect())} => ${format(value)} number multiplier`,
         cost: DC.D50,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
@@ -79,7 +79,7 @@ const infinityupgadedata = [
         },
         decription: "number multiplier do x1e30 more",
         effectdisplay: value => "x" + format(value) + " number multiplier",
-        cost: DC.D100,
+        cost: DC.D75,
         currencykey: "infinitypoints",
         mainele: "INF-UG",
         reqirement: true,
@@ -310,6 +310,7 @@ const infinity = {
         gain = gain.pow(InfinityUpgrades[21].effectordefault(1));
         gain = gain.pow(InfinityUpgrades[22].effectordefault(1));
         gain = gain.mul(EternityUpgrades[0].effectordefault(1));
+        gain = gain.mul(EternityUpgrades[5].effectordefault(1));
         gain = gain.mul(EternityUpgrades[6].effectordefault(1));
         gain = gain.pow(EternityUpgrades[13].effectordefault(1));
         gain = gain.mul(EternityUpgrades[16].effectordefault(1));
@@ -317,8 +318,8 @@ const infinity = {
 
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1));
 
-        if(InfinityUpgrades[7].brought) gain = gain.mul(2);
-        if(InfinityUpgrades[8].brought) gain = gain.mul(2);
+        if(InfinityUpgrades[7].brought && !this.broken) gain = gain.mul(2);
+        if(InfinityUpgrades[8].brought && !this.broken) gain = gain.mul(2);
 
         gain = gain.pow(TotalGlyphEffects.Infinity());
         if(!this.broken) return gain.mul(Universal.gainedbonus);
@@ -342,8 +343,8 @@ const infinity = {
         if(EternityUpgrades[2].brought) gain = gain.mul(2);
         gain = gain.mul(EternityUpgrades[6].effectordefault(1));
 
-        if(EternityUpgrades[7].brought && this.gainedinfinitypoints.gt(0)) gain = this.gainedinfinitypoints.div(1e4);
-        if(EternityUpgrades[10].brought) {gain = gain.mul(100); speed = speed.mul(5);}
+        if(this.gainedinfinitypoints.gt(0)) gain = EternityUpgrades[7].effectordefault(1);
+        if(EternityUpgrades[10].brought) {gain = gain.mul(100); speed = speed.mul(5);};
         if(EternityUpgrades[14].brought) speed = speed.mul(10);
         if(RealityUpgrades[16].brought) speed = speed.mul(10);
         speed = speed.mul(game.speed);
@@ -353,7 +354,8 @@ const infinity = {
 
     reset(){
         if(!this.caninfinity) return false;
-        Currency.IP = Currency.IP.add(this.gainedinfinitypoints).min(this.limit);
+        const overflow = this.broken ? DC.D1 : Currency.number.div(this.numberlimit).log10().pow(0.1);
+        Currency.IP = Currency.IP.add(this.gainedinfinitypoints.mul(overflow)).min(this.limit);
         Currency.INFs = Currency.INFs.add(this.gainedinfinitys);
         Currency.number = DC.D1;
         Time.bestinfinity = Time.bestinfinity.min(Time.thisinfinity);
@@ -363,7 +365,6 @@ const infinity = {
     upgradereset(){
         let keep = 0;
         if(EternityUpgrades[4].brought) keep = 7;
-        if(EternityUpgrades[5].brought) keep = 9;
         if(EternityUpgrades[8].brought) keep = 14;
         if(EternityUpgrades[11].brought) keep = 18;
         if(EternityUpgrades[12].brought) keep = 21;
@@ -374,7 +375,6 @@ const infinity = {
     get heighestKeepedUpgrade(){
         let keep = 0;
         if(EternityUpgrades[4].brought) keep = 7;
-        if(EternityUpgrades[5].brought) keep = 9;
         if(EternityUpgrades[8].brought) keep = 14;
         if(EternityUpgrades[11].brought) keep = 18;
         if(EternityUpgrades[12].brought) keep = 21;

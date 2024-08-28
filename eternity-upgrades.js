@@ -3,11 +3,11 @@ const eternityupgadedata = [
     {
         id: 0,
         effect: () => {
-            return DC.D3;
+            return DC.D5;
         },
         decription: "gain one infinity point every 10 seconds <br> also triples IP gain",
         effectdisplay: value => "1/10 IP sec and x" + format(value) + " IP",
-        cost: DC.D1,
+        cost: DC.DD1,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -19,7 +19,7 @@ const eternityupgadedata = [
         },
         decription: "half the time of the first eternity upgrade",
         effectdisplay: value => "auto IP interval /" + format(value),
-        cost: DC.D2,
+        cost: new Decimal(1.5),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -31,7 +31,7 @@ const eternityupgadedata = [
         },
         decription: "double the auto gain of the first eternity upgrade",
         effectdisplay: value => "x" + format(value) + " auto IP",
-        cost: DC.D2,
+        cost: new Decimal(1.5),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -43,7 +43,7 @@ const eternityupgadedata = [
         },
         decription: "10x EP gain",
         effectdisplay: value =>"x" + format(value) + " EP",
-        cost: DC.D5,
+        cost: DC.D3,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -64,15 +64,15 @@ const eternityupgadedata = [
     {
         id: 5,
         effect: () => {
-            return DC.D9;
+            return Currency.ETRs.sqrt().max(1).min(50);
         },
-        decription: "start with the first 9 infinity upgrades",
-        effectdisplay: value => "keeped " + format(value) + " infinity upgrades",
+        decription: "gain an IP muliplyer based on eternitys",
+        effectdisplay: value => `x${format(value)} IP`,
         cost: DC.D25,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
-        onbuy: () => InfinityUpgrades.filter(x => x.id < 9).forEach(x => {x.brought = true}),
+        onbuy: () => InfinityUpgrades.filter(x => x.id < 10).forEach(x => {x.brought = true}),
     },
     {
         id: 6,
@@ -81,7 +81,7 @@ const eternityupgadedata = [
         },
         decription: "gain 5x more IP and 50x auto IP",
         effectdisplay: value => "x" + format(value) + " IP, x50 Auto IP",
-        cost: DC.D50,
+        cost: DC.D25,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -89,11 +89,11 @@ const eternityupgadedata = [
     {
         id: 7,
         effect: () => {
-            return infinity.gainedinfinitypoints.div(1e4);
+            return infinity.gainedinfinitypoints;
         },
-        decription: "auto IP is the amount you would gain / 1e4",
-        effectdisplay: value => format(value) + " IP/s" ,
-        cost: DC.D100,
+        decription: "auto IP is the amount you would gain / 10",
+        effectdisplay: value => format(value.div(10)) + " IP/s<br>(not displayed with speed or later effects)" ,
+        cost: DC.D75,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -103,9 +103,9 @@ const eternityupgadedata = [
         effect: () => {
             return DC.D14;
         },
-        decription: "start with infinity broken",
-        effectdisplay: value => "keeped " + format(value) + " infinity upgrades",
-        cost: DC.D250,
+        decription: "start with infinity broken and statically double EP gain",
+        effectdisplay: value => "keeped " + format(value) + " infinity upgrades and Static 2x EP",
+        cost: DC.D150,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -118,7 +118,7 @@ const eternityupgadedata = [
         },
         decription: "gain 5 times more EP",
         effectdisplay: value => "x" + format(value)  + " EP",
-        cost: DC.D500,
+        cost: DC.D250,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
         reqirement: true,
@@ -214,8 +214,8 @@ const eternityupgadedata = [
         effect: () => {
             return Currency.EP.log(10).pow(0.5).min(5);
         },
-        decription: "gain more EP based on EP up to 5 times",
-        effectdisplay: value => `x${format(value)} EP`,
+        decription: "gain more EP based on EP up to 5 times also square EP gain",
+        effectdisplay: value => `x${format(value)} and ^2 EP`,
         cost: new Decimal(2e8),
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -336,10 +336,12 @@ const Eternity = {
         gain = gain.pow(EternityUpgrades[21].effectordefault(1));
         gain = gain.pow(EternityUpgrades[23].effectordefault(1));
         gain = gain.mul(RealityUpgrades[0].effectordefault(1));
-
+        
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1));
-
+        
         gain = gain.pow(TotalGlyphEffects.Eternity());
+
+        if(EternityUpgrades[8].brought) gain = gain.mul(2);
         if(!this.broken) return gain.mul(Universal.gainedbonus);
         const prestage = (EternityUpgrades[22].brought) ? Currency.IP.div(this.IPreq).log(2) : Currency.IP.div(this.IPreq).log(10);
 
@@ -373,6 +375,10 @@ const Eternity = {
 
     reset(){
         if(!this.caneternity) return false;
+        if(Currency.ETRs.eq(0) && game.progress == 2) {
+            player.scroll.tab = 0;
+            tabchange();
+        }
         if(Time.thiseternity.lte(600) && Currency.ETRs.eq(0) && Currency.REAs.eq(0)) ImmensityUpgrades[3].HasMetUnlockRequirment = true;
         if(!InfinityUpgrades[1].brought && Currency.ETRs.eq(0) && Currency.REAs.eq(0)) ImmensityUpgrades[5].HasMetUnlockRequirment = true;
 
@@ -389,18 +395,20 @@ const Eternity = {
 
     upgradereset(){
         let keep = 0;
-        if(RealityUpgrades[1].brought) keep = 1;
-        if(RealityUpgrades[2].brought) keep = 3;
-        if(RealityUpgrades[3].brought) keep = 5;
+        if(RealityUpgrades[0].brought) keep = 1;
+        if(RealityUpgrades[1].brought) keep = 3;
+        if(RealityUpgrades[2].brought) keep = 5;
+        if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
 
         EternityUpgrades.forEach(x => {x.brought = (x.id < keep) ? true: false})
     },
     get heighestKeepedUpgrade(){
         let keep = 0;
-        if(RealityUpgrades[1].brought) keep = 1;
-        if(RealityUpgrades[2].brought) keep = 3;
-        if(RealityUpgrades[3].brought) keep = 5;
+        if(RealityUpgrades[0].brought) keep = 1;
+        if(RealityUpgrades[1].brought) keep = 3;
+        if(RealityUpgrades[2].brought) keep = 7;
+        if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
         return keep;
     },
