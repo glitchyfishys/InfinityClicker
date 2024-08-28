@@ -304,7 +304,9 @@ const catalogdata = [
     {
         version: "V3.1.1 web",
         who: "glitchyfishys",
-        what: `converted the game to web, with small changes `,
+        what: `converted the game to web, with small changes
+            shift clicking instead of the space bar
+        `,
     },
 ]
 
@@ -324,6 +326,7 @@ function loadcatalog(){
     catalog.innerHTML = catalog.innerHTML.replaceAll("reality", "<span id='redact' class='redact'>reality</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Reality", "<span id='redact' class='redact'>Reality</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Quantum", "<span id='redact' class='redact'>Quantum</span>");
+    catalog.innerHTML = catalog.innerHTML.replaceAll("quantum", "<span id='redact' class='redact'>quantum</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("immensity", "<span id='redact' class='redact'>immensity</span>");
     catalog.innerHTML = catalog.innerHTML.replaceAll("Immensity", "<span id='redact' class='redact'>Immensity</span>");
 

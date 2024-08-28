@@ -482,8 +482,8 @@ const Reality = {
         
         const keys = Object.keys(GlyphType);
         keys.forEach( z => filt.push( player.glyphs.filter(x =>
-            x.type == GlyphType[z]).sort((x,y) => GlyphEffects[Object.entries(GlyphType)[x.type][0]](x.level,x.power).lt(
-            GlyphEffects[Object.entries(GlyphType)[y.type][0]](y.level,y.power)) - 1)));
+            x.type == GlyphType[z]).sort((x,y) => GlyphEffects[x.nametype](x.level,x.power).lt(
+            GlyphEffects[y.nametype](y.level,y.power)) - 1)));
         player.glyphs = filt.flat();
         
 
@@ -494,9 +494,11 @@ const Reality = {
             Object.keys(GlyphType).forEach(t => {
                 let n = player.glyphs.filter(g => g.type == GlyphType[t] || (g.type == GlyphType[t] && g.active))
 
-                let active = n.filter(x => x.active).length;
-
-                list.push( n.slice(0, v + active));
+                let active = n.filter(x => x.active);
+                let c = n.filter(x => !x.active).slice(0,v);
+                c.push(active);
+                list.push(c.flat().sort((x,y) => GlyphEffects[x.nametype](x.level,x.power).lt(
+                    GlyphEffects[y.nametype](y.level,y.power)) - 1));
                 }
             );
 
@@ -649,6 +651,10 @@ class Glyph {
     type = 0;
     active = false;
     arrayid = 0;
+
+    get nametype(){
+        return Object.entries(GlyphType)[this.type][0];
+    }
 
     activate(){
         if(Reality.AvalableGlyphsSlots != 0 ) this.active = true;
