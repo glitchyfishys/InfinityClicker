@@ -89,10 +89,10 @@ const eternityupgadedata = [
     {
         id: 7,
         effect: () => {
-            return infinity.gainedinfinitypoints;
+            return infinity.gainedinfinitypoints.div(10);
         },
-        decription: "auto IP is the amount you would gain / 10",
-        effectdisplay: value => format(value.div(10)) + " IP/s<br>(not displayed with speed or later effects)" ,
+        decription: "auto IP is the amount you would gain on infinitys / 10",
+        effectdisplay: value => format(value) + " IP/s<br>(not displayed with later effects)" ,
         cost: DC.D75,
         currencykey: "eternitypoints",
         mainele: "ETR-UG",
@@ -338,6 +338,9 @@ const Eternity = {
         gain = gain.mul(RealityUpgrades[0].effectordefault(1));
         if(RealityUpgrades[1].brought) gain = gain.pow(1.1);
         
+        gain = gain.mul(RealityUpgrades[2].effectordefault(1));
+
+
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1));
         
         gain = gain.pow(TotalGlyphEffects.Eternity());
@@ -362,7 +365,6 @@ const Eternity = {
         let speed = DC.D1.div(60);
         
         if(RealityUpgrades[1].brought) speed = speed.mul(2);
-        if(RealityUpgrades[2].brought) gain = gain.mul(2);
         if(RealityUpgrades[3].brought) speed = speed.mul(2);
         if(RealityUpgrades[7].brought) speed = speed.mul(3);
         if(RealityUpgrades[14].brought) speed = speed.mul(10);
@@ -397,7 +399,6 @@ const Eternity = {
     upgradereset(){
         let keep = 0;
         if(RealityUpgrades[0].brought) keep = 1;
-        if(RealityUpgrades[2].brought) keep = 5;
         if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
 
@@ -406,7 +407,6 @@ const Eternity = {
     get heighestKeepedUpgrade(){
         let keep = 0;
         if(RealityUpgrades[0].brought) keep = 1;
-        if(RealityUpgrades[2].brought) keep = 7;
         if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
         return keep;

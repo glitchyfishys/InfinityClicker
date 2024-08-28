@@ -62,7 +62,7 @@ const immensityupgadedata = [
             return Time.totaltime.add(1).max(1);
         },
         decription: "IP EP RP and IM gain are multiplied by total time played",
-        effectdisplay: value => `x${format(value,1)} IP,EP,<br>x${format(value.div(10),1)} RP and x${format(value.pow(0.2),1)} IM`,
+        effectdisplay: value => `x${format(value,1)} IP,EP,<br>x${format(value.div(10),1)} RP and x${ BlackHoles.length > 0 ? format(value.div(1e3).pow(0.7),1) : format(value.pow(0.2),1)} IM`,
         cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
@@ -75,8 +75,8 @@ const immensityupgadedata = [
         effect: () => {
             return DC.D1;
         },
-        decription: "keep auto clicker speed an stays unlocked",
-        effectdisplay: value => `max auto clicker speed and stays unlocked`,
+        decription: "keep auto clicker speed an stays unlocked and runs 15 times faster",
+        effectdisplay: value => `max auto clicker speed and stays unlocked and x15 auto clicker speed`,
         cost: DC.D0,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
@@ -109,9 +109,9 @@ const immensityupgadedata = [
         effect: () => {
             return DC.D1;
         },
-        decription: "unlock a black hole",
-        effectdisplay: value => `black hole`,
-        cost: DC.D100,
+        decription: "unlock a black hole also imporves IM gain from immisinity upgrade 5",
+        effectdisplay: value => `black hole, ajusted IMU5 effect`,
+        cost: DC.D10,
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
@@ -160,7 +160,8 @@ const Immensity = {
         let gain = DC.D1;
 
 
-        gain = gain.mul(ImmensityUpgrades[4].effectordefault(1).pow(0.2).max(1));
+        gain = BlackHoles.length > 0 ? gain.mul(ImmensityUpgrades[4].effectordefault(1).div(1e3).pow(0.7))
+        : gain.mul(ImmensityUpgrades[4].effectordefault(1).pow(0.2).max(1));
         
 
         if(!this.broken) return gain;
@@ -226,18 +227,23 @@ const Immensity = {
         Blackhole.style.height = BlackHoles[0].size + "px";
         if(game.isMobile){
             BHinfo.style.width = "150px";
-            BHinfo.style.marginLeft = "20px";
             BHinfo.style.fontSize = "12px";
+            BHinfo.style.right = "calc(100% - 150px)";
+            BHinfo.style.marginRight = "-40px";
+
+            BHinfo.style.position = "absolute";
+
+        }else{
+            BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 120px)`;
         }
         Blackhole.style.left = `calc(${(50 * (3-player.scroll.tab))}%)`;
-        BHbuttons.style.left = `calc(${(50 * (3-player.scroll.tab))}% - 112.5px)`;
 
         if(player.scroll.tab == 2) {BHbuttons.classList.remove("hidden");}
         else {BHbuttons.classList.add("hidden");}
 
-        BH1.innerHTML = "upgrade black hole interval by 30%<br> cost: " + format(BlackHoles[0].intervalcost) + " IM";
-        BH2.innerHTML = "upgrade black hole power by 25%<br> cost: " + format(BlackHoles[0].powercost) + " IM";
-        BH3.innerHTML = "upgrade black hole duration 20%<br> cost: " + format(BlackHoles[0].lengthcost) + " IM";
+        BH1.innerHTML = "decrease black hole interval by 30%<br> cost: " + format(BlackHoles[0].intervalcost) + " IM";
+        BH2.innerHTML = "increase black hole power by 25%<br> cost: " + format(BlackHoles[0].powercost) + " IM";
+        BH3.innerHTML = "increase black hole duration by 20%<br> cost: " + format(BlackHoles[0].lengthcost) + " IM";
     
         BlackHoles[0].intervalcost.lte(Currency.IM) ? BH1.classList.add("buyable") : BH1.classList.remove("buyable");
         BlackHoles[0].powercost.lte(Currency.IM) ? BH2.classList.add("buyable") : BH2.classList.remove("buyable");
@@ -268,7 +274,7 @@ class BlackHole {
         if(data.active != undefined) this.active = data.active;
     }
 
-    baseinterval = 900;
+    baseinterval = 300;
     baselength = 10;
     active = false;
     timer = 0;
@@ -335,7 +341,7 @@ class BlackHole {
     }
 
     get powercost(){
-        return DC.D10.mul(Decimal.pow(2,this.powerUGs));
+        return DC.D5.mul(Decimal.pow(2,this.powerUGs));
     }
 
     buypower(){
@@ -346,18 +352,19 @@ class BlackHole {
     }
 
     get intervalcost(){
-        return DC.D10.mul(Decimal.pow(2,this.intervalUGs));
+        return DC.D5.mul(Decimal.pow(2,this.intervalUGs));
     }
 
     buyinterval(){
         if(Currency.IM.gt(this.intervalcost)){
             Currency.IM = Currency.IM.sub(this.intervalcost);
             this.intervalUGs++;
+            this.timer /= 1.3;
         }
     }
 
     get lengthcost(){
-        return DC.D10.mul(Decimal.pow(2,this.lengthUGs));
+        return DC.D5.mul(Decimal.pow(2,this.lengthUGs));
     }
 
     buylength(){

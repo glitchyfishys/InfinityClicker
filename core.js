@@ -53,6 +53,7 @@ var player = {
 var settings = {
     glyphkeepamount: 3,
     glyphselect: "none",
+    zoom: 1,
     confirm: {
         infinity: true,
         eternity: true,
@@ -274,6 +275,7 @@ function startup(){
     setInterval(savegame, 60000);
     kdstart();
     TN.style.opacity = "0";
+    document.body.style.zoom = settings.zoom;
 }
 
 function gameloop(deltaticks = 0){
@@ -367,7 +369,9 @@ function autotick(){
 
     if(ImmensityUpgrades[5].brought) {
         autospeed = new Decimal(1500);
-    }else{
+        if(ImmensityUpgrades[5].brought) autospeed = autospeed.mul(15);
+    }
+    else{
         if(InfinityUpgrades[2].brought) autospeed = autospeed.mul(2);
         if(InfinityUpgrades[3].brought) autospeed = autospeed.mul(5);
         if(InfinityUpgrades[17]) autospeed = autospeed.mul(3);
@@ -377,7 +381,6 @@ function autotick(){
     
     Currency.number = Currency.number.mul(nummul().pow(autospeed.mul(Deltatime / 4)));
 }
-
 
 //save and load
 function savegame(){

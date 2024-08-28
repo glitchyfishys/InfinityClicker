@@ -28,10 +28,10 @@ const realityupgadedata = [
     {
         id: 2,
         effect: () => {
-            return DC.D2;
+            return Time.thisreality.div(15).mul(Currency.REAs).pow(0.75).max(1);
         },
-        decription: "x2 auto EP and keep the 7 eternity upgrade",
-        effectdisplay: value => "2x auto EP and keep 7 eternity upgrade",
+        decription: "gain an EP muliplyer based on time in this reality and realitys",
+        effectdisplay: value => `x ${format(value)} EP`,
         cost: new Decimal(2.5),
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -43,8 +43,8 @@ const realityupgadedata = [
         effect: () => {
             return DC.D5;
         },
-        decription: "half the time and keep the 10 eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep 10 eternity upgrade",
+        decription: "half the time of reality upgrade 1 and keep the 10 eternity upgrades",
+        effectdisplay: value => "auto EP interval /2 and keep 10 eternity upgrades",
         cost: DC.D5,
         currencykey: "realitypoints",
         mainele: "REA-UG",
@@ -54,10 +54,10 @@ const realityupgadedata = [
     {
         id: 4,
         effect: () => {
-            return DC.D3;
+            return Eternity.gainedeternitypoints.mul(12);
         },
-        decription: "auto EP is faster and is how huch you gain / 1e5",
-        effectdisplay: value => "auto EP interval /3",
+        decription: "auto EP is faster and is how huch you gain on eternitys",
+        effectdisplay: value => `auto EP interval /3<br> ${format(value)} EP/s <br>(not displayed with later effects)`,
         cost: DC.D10,
         currencykey: "realitypoints",
         mainele: "REA-UG",

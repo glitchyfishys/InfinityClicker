@@ -28,8 +28,45 @@ const modal ={
         this.openid = 1;
     },
 
-    showsave(text = "import/export <br> importing can cause issues<br> if there is an error refresh before autosave happens") {
+    showzoom(text = "zoom") {
         gamemodel.innerHTML = "";
+        
+        let displaytext = "";
+        Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
+        
+        gamemodel.innerHTML += displaytext;
+        
+        gamemodel.appendChild(document.createElement("br"));
+
+        bu = gamemodel.appendChild(document.createElement("input"));
+        bu.type = "range";
+        bu.min = "25";
+        bu.max = "200";
+        bu.id = "zoommod";
+        bu.value = settings.zoom*100;
+        bu.onchange = () => {document.body.style.zoom = zoommod.valueAsNumber/100; settings.zoom = zoommod.valueAsNumber/100};
+        bu.style.width = "200px";
+        bu.style.height = "20px"
+
+        gamemodel.appendChild(document.createElement("br"));
+
+        bu = gamemodel.appendChild(document.createElement("button"));
+        bu.innerHTML = "reset";
+        bu.style.width = "200px";
+        bu.style.height = "20px"
+        bu.onclick = () => {document.body.style.zoom = 1; settings.zoom = 1; zoommod.value = 100;};
+
+        const cl = gamemodel.appendChild(document.createElement("button"));
+        cl.innerHTML = "X";
+        cl.classList.add("closemodalbutton");
+        cl.onclick = () => this.close();
+
+        modal.show();
+        this.openid = 1;
+    },
+
+    showsave(text = "") {
+        gamemodel.innerHTML = "import/export <br> importing can cause issues<br> if there is an error refresh before autosave happens";
         
         let displaytext = "";
         Array.isArray(text) ? text.forEach(x => displaytext += x + "<br>" ) : displaytext = text;
@@ -54,6 +91,8 @@ const modal ={
         bu.value = "save";
         bu.style.width = "200px";
         bu.style.height = "20px"
+        bu.onfocus = () => kd.stop();
+        bu.onblur = () => kdstart();
         gamemodel.appendChild(document.createElement("br"));
 
         bu = gamemodel.appendChild(document.createElement("button"));
@@ -224,22 +263,22 @@ const modal ={
 
         if(game.progress > 1){
             let al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `infinity<br>you have infinityed ${format(Currency.INFs)} times ${game.progress > 2 ? "this eternity" : ""}<br> you have been in this infinity for ${Time.format(Time.thisinfinity)} seconds and your best infinity time is ${Time.format(Time.bestinfinity)} seconds <br><br>`;
+            al.innerHTML = `infinity<br>you have infinityed ${format(Currency.INFs)} times ${game.progress > 2 ? "this eternity" : ""}<br> you have been in this infinity for ${Time.format(Time.thisinfinity)} and your fastest infinity time is ${Time.format(Time.bestinfinity)} <br><br>`;
         }
 
         if(game.progress > 2){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `eternity<br>you have eternityed ${format(Currency.ETRs)} times ${game.progress > 3 ? "this reality" : ""}<br> you have been in this eternity for ${Time.format(Time.thiseternity)} seconds and your best eternity time is ${Time.format(Time.besteternity)} seconds <br><br>`;
+            al.innerHTML = `eternity<br>you have eternityed ${format(Currency.ETRs)} times ${game.progress > 3 ? "this reality" : ""}<br> you have been in this eternity for ${Time.format(Time.thiseternity)} and your fastest eternity time is ${Time.format(Time.besteternity)} <br><br>`;
         }
 
         if(game.progress > 3){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `reality<br>you have realityed ${format(Currency.REAs)} times ${game.progress > 4 ? "this immensity" : ""}<br> you have been in this reality for ${Time.format(Time.thisreality)} seconds and your best reality time is ${Time.format(Time.bestreality)} seconds <br><br>`;
+            al.innerHTML = `reality<br>you have realityed ${format(Currency.REAs)} times ${game.progress > 4 ? "this immensity" : ""}<br> you have been in this reality for ${Time.format(Time.thisreality)} and your fastest reality time is ${Time.format(Time.bestreality)} <br><br>`;
         }
 
         if(game.progress > 4){
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `immensity<br>you have immensityed ${format(Currency.IMMs)} times <br> you have been in this immensity for ${Time.format(Time.thisimmensity)} seconds and your best immensity time is ${Time.format(Time.bestimmensity)} seconds`;
+            al.innerHTML = `immensity<br>you have immensityed ${format(Currency.IMMs)} times <br> you have been in this immensity for ${Time.format(Time.thisimmensity)} and your fastest immensity time is ${Time.format(Time.bestimmensity)}`;
         }
 
         let cl = gamemodel.appendChild(document.createElement("button"));
@@ -286,7 +325,7 @@ const modal ={
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = `reality = "Y" <br> buy max reality upgrades = "L" <br>`;
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = `toggle auto buys with alt + A<br><br>`;
+            al.innerHTML = `toggle auto buyers with alt + A<br><br>`;
         }
 
         if(game.progress > 4){
