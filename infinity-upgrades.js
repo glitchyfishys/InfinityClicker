@@ -354,7 +354,7 @@ const infinity = {
 
     reset(){
         if(!this.caninfinity) return false;
-        const overflow = this.broken ? DC.D1 : Currency.number.div(this.numberlimit).log10().pow(0.1);
+        const overflow = this.broken ? DC.D1 : Currency.number.div(this.numberlimit).log10().pow(0.1).max(1);
         Currency.IP = Currency.IP.add(this.gainedinfinitypoints.mul(overflow)).min(this.limit);
         Currency.INFs = Currency.INFs.add(this.gainedinfinitys);
         Currency.number = DC.D1;

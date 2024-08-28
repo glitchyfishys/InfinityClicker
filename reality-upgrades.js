@@ -494,14 +494,9 @@ const Reality = {
             Object.keys(GlyphType).forEach(t => {
                 let n = player.glyphs.filter(g => g.type == GlyphType[t] || (g.type == GlyphType[t] && g.active))
 
-                const na = n.filter(x => !x.active);
-                const ia = n.filter(x => x.active);
-                ia.push(na);
-                const sorted = ia.flat();
+                let active = n.filter(x => x.active).length;
 
-                let active = 0;
-                ia.forEach(x => x.active ? active++ : false);
-                list.push( sorted.slice(0,Math.max(v,active)));
+                list.push( n.slice(0, v + active));
                 }
             );
 
