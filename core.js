@@ -262,7 +262,7 @@ function startup(){
     loadgame();
     loadcatalog();
     tabchange();
-    glyphkeepamount.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI(["how many glyphs of each type to keep", "active ones get pushed to the start"], "black");};
+    glyphkeepamount.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI(["how many glyphs of each type to keep"], "black");};
     glyphkeepamount.onmouseleave = () => {mouse.classList.add("hidden");};
 
     glyphselect.onmouseenter = () => {mouse.classList.remove("hidden"); hoverUI(["on reality witch glyphs to give"], "black");};
