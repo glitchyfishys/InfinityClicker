@@ -130,7 +130,7 @@ const immensityupgadedata = [
         currencykey: "immensitypoints",
         mainele: "IMM-UG",
         reqirement: true,
-        unlock: () => Time.totaltime.gt(8640000),
+        unlock: () => Time.totaltime.gt(864000),
         reqirementtext: "play for one hundred days",
     },
 ]
