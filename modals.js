@@ -138,6 +138,8 @@ const modal ={
             al.onclick = () => {settings.confirm.infinity = !settings.confirm.infinity};
             al.checked = settings.confirm.infinity;
 
+            gamemodel.appendChild(document.createElement("br"));
+
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "auto infinity";
             al = gamemodel.appendChild(document.createElement("input"));
@@ -147,8 +149,9 @@ const modal ={
         }
 
         if(game.progress > 2){
-            al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = "<br>";
+            gamemodel.appendChild(document.createElement("br"));
+            gamemodel.appendChild(document.createElement("br"));
+
 
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "confirm eternity";
@@ -157,8 +160,10 @@ const modal ={
             al.onclick = () => {settings.confirm.eternity = !settings.confirm.eternity};
             al.checked = settings.confirm.eternity;
 
+            gamemodel.appendChild(document.createElement("br"));
+
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = "auto infinity";
+            al.innerHTML = "auto eternity";
             al = gamemodel.appendChild(document.createElement("input"));
             al.type = "checkbox";
             al.onclick = () => {settings.auto.eternity = !settings.auto.eternity};
@@ -166,6 +171,7 @@ const modal ={
         }
 
         if(game.progress > 3){
+            gamemodel.appendChild(document.createElement("br"));
             gamemodel.appendChild(document.createElement("br"));
             
             al = gamemodel.appendChild(document.createElement("span"));
@@ -176,7 +182,7 @@ const modal ={
             al.checked = settings.confirm.reality;
 
             gamemodel.appendChild(document.createElement("br"));
-
+            
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "confirm glyph sorting";
             al = gamemodel.appendChild(document.createElement("input"));
@@ -187,7 +193,7 @@ const modal ={
             gamemodel.appendChild(document.createElement("br"));
 
             al = gamemodel.appendChild(document.createElement("span"));
-            al.innerHTML = "auto infinity";
+            al.innerHTML = "auto reality";
             al = gamemodel.appendChild(document.createElement("input"));
             al.type = "checkbox";
             al.onclick = () => {settings.auto.reality = !settings.auto.reality};
@@ -195,6 +201,9 @@ const modal ={
         }
 
         if(game.progress > 4){
+            gamemodel.appendChild(document.createElement("br"));
+            gamemodel.appendChild(document.createElement("br"));
+
             al = gamemodel.appendChild(document.createElement("span"));
             al.innerHTML = "confirm immensity";
             al = gamemodel.appendChild(document.createElement("input"));
