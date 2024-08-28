@@ -18,13 +18,12 @@ const realityupgadedata = [
         effect: () => {
             return DC.D1;
         },
-        decription: "half the EP interval and keep the first 3 eternity upgrade",
-        effectdisplay: value => "auto EP interval /2 and keep 3 eternity upgrades",
+        decription: "half the EP interval and ^1.1 EP gain",
+        effectdisplay: value => "auto EP interval /2 and ^1.1 EP",
         cost: DC.D2,
         currencykey: "realitypoints",
         mainele: "REA-UG",
         reqirement: true,
-        onbuy: () => EternityUpgrades.filter(x => x.id < 3).forEach(x => {x.brought = true}),
     },
     {
         id: 2,

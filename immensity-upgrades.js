@@ -131,7 +131,7 @@ const immensityupgadedata = [
         mainele: "IMM-UG",
         reqirement: true,
         unlock: () => Time.totaltime.gt(864000),
-        reqirementtext: "play for one hundred days",
+        reqirementtext: "play for ten days",
     },
 ]
 

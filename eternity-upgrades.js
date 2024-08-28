@@ -336,6 +336,7 @@ const Eternity = {
         gain = gain.pow(EternityUpgrades[21].effectordefault(1));
         gain = gain.pow(EternityUpgrades[23].effectordefault(1));
         gain = gain.mul(RealityUpgrades[0].effectordefault(1));
+        if(RealityUpgrades[1].brought) gain = gain.pow(1.1);
         
         gain = gain.mul(ImmensityUpgrades[4].effectordefault(1));
         
@@ -396,7 +397,6 @@ const Eternity = {
     upgradereset(){
         let keep = 0;
         if(RealityUpgrades[0].brought) keep = 1;
-        if(RealityUpgrades[1].brought) keep = 3;
         if(RealityUpgrades[2].brought) keep = 5;
         if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
@@ -406,7 +406,6 @@ const Eternity = {
     get heighestKeepedUpgrade(){
         let keep = 0;
         if(RealityUpgrades[0].brought) keep = 1;
-        if(RealityUpgrades[1].brought) keep = 3;
         if(RealityUpgrades[2].brought) keep = 7;
         if(RealityUpgrades[3].brought) keep = 10;
         if(RealityUpgrades[13].brought) keep = 25;
