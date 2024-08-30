@@ -494,7 +494,7 @@ function loadgame(sav, set){
     }
 
     if(ImmensityUpgrades[6].brought) glyphselect.classList.remove("hidden");
-
+    tabchange();
     if(sav.lastonlinetick != undefined){
         const ticklength = (Date.now() - sav.lastonlinetick) / 1000;
         for(let t=0; t < 1000; t++) gameloop(ticklength / 1000);
