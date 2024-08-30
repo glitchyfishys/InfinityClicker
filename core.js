@@ -272,7 +272,6 @@ function startup(){
 
     toggleuni(false);
     setInterval(gameloop, 25);
-    setInterval(savegame, 60000);
     kdstart();
     TN.style.opacity = "0";
     document.body.style.zoom = settings.zoom;
@@ -302,6 +301,8 @@ function gameloop(deltaticks = 0){
         if(game.frametick == 0) UIupdate();
     }
     player.money.highestnumber = player.money.highestnumber.max(player.money.number);
+    if(deltaticks == 0) game.timesinsesave += Deltatime;
+    if(game.timesinsesave > 60) savegame();
 }
 
 function UIupdate(){
@@ -384,6 +385,7 @@ function autotick(){
 
 //save and load
 function savegame(){
+
     for(let i=0; i < ImmensityUpgrades.length; i++) {
         player.immensityupgrades[i] = ImmensityUpgrades[i].brought;
         player.immensityupgradereqirements[i] = ImmensityUpgrades[i].HasMetUnlockRequirment;
@@ -408,7 +410,8 @@ function savegame(){
     settings.glyphkeepamount = glyphkeepamount.value;
 
     localStorage.setItem("InfinityClickerSettings", JSON.stringify(settings));
-    notify("game saved", 3, "#00aaff")
+    notify("game saved", 3, "#00aaff");
+    game.timesinsesave = 0;
 }
 
 function loadgame(sav, set){
@@ -475,9 +478,11 @@ function loadgame(sav, set){
     if(set != undefined){
         const skey = Object.keys(set);
         skey.forEach(k => settings[k] = set[k]);
+        
 
-        glyphselect.value = settings.glyphselect;
-        glyphkeepamount.value = settings.glyphkeepamount;
+        if(set.glyphselect != undefined) glyphselect.value = settings.glyphselect;
+        if(set.glyphkeepamount != undefined) glyphkeepamount.value = settings.glyphkeepamount;
+
         if(set.confirm != undefined){
             const ck = Object.keys(set.confirm);
             ck.forEach(x => settings.confirm[x] = set.confirm[x]);
@@ -568,7 +573,8 @@ game = {
     },
     get isMobile() {
         return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    }
+    },
+    timesinsesave: 0,
 }
 
 // this run ticks fast
@@ -840,6 +846,7 @@ function shortnum(num = 0,pls = 2){
 }
 
 function expo(){
+    savegame();//just to be safe
     navigator.clipboard.writeText(btoa(JSON.stringify(player)) + "settings split" + btoa(JSON.stringify(settings)));
     notify("copyed save", 5, "lightblue");
 }
@@ -857,6 +864,6 @@ function impo(){
     } catch (error) {
         notify("failed to Decode settings", 25, "red");        
     }
-    loadgame(atob(s[0]), atob(s[1]));
+    loadgame(JSON.parse(atob(s[0])), JSON.parse(atob(s[1])));
     notify("save imported", 5, "lime")
 }
